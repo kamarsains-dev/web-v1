@@ -1,9 +1,8 @@
-import Welcome from "./welcome/welcome";
 
 export default function Home() {
   return (
     <div className="">
-      <Welcome/>
+      <h1>home</h1>
     </div>
   );
 }

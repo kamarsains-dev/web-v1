@@ -7,7 +7,7 @@ export const Header = () => {
         <header className="h-14 w-full border-b-2 border-slate-200 px-4">
             <div className="lg:max-w-screen-xl mx-auto flex items-center justify-between h-full">
                 <div className=" flex items-center gap-x-3">
-                    <Link href='/'>
+                    <Link href=''>
                         <Image
                         src="/logo.svg"
                         height={35}
@@ -18,7 +18,7 @@ export const Header = () => {
                     </Link>
                     
                     <h1 className="text-2xl font-bold text-gray-900 tracking-wide hidden lg:block">
-                        <Link href='/'>
+                        <Link href=''>
                             Kamar Sains
                         </Link>
                     </h1>
