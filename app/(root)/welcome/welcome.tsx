@@ -16,7 +16,7 @@ const Welcome = () => {
                 width={500}
                 height={500}
                 alt="main-mascot"
-                className="max-w-xl mx-auto"
+                className="lg:max-w-xl lg:w-[800px] mx-auto"
                 />
                 <h1 className="font-bold text-4xl lg:text-6xl text-white">
                     Discover Your Star
