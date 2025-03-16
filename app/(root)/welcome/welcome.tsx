@@ -1,7 +1,6 @@
 "use client"
 
-import Lottie from "lottie-react";
-import animationData from "@/public/animations/solar.json"
+import Mascot from "@/public/mascot1.svg"
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import BiologyIcon from "@/public/biology.svg"
@@ -12,7 +11,13 @@ const Welcome = () => {
      <div className="flex-1 bg-hero-pattern text-center items-center justify-center">
         <div className="w-full bg-star-pattern">
             <div>
-                <Lottie className="max-w-xl mx-auto" animationData={animationData} loop={true}/>
+                <Image
+                src={Mascot}
+                width={500}
+                height={500}
+                alt="main-mascot"
+                className="max-w-xl mx-auto lg:w-[900px]"
+                />
                 <h1 className="font-bold text-4xl lg:text-6xl text-white">
                     Discover Your Star
                 </h1>
