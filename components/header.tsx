@@ -18,7 +18,7 @@ export const Header = () => {
                     </Link>
                     
                     <h1 className="text-2xl font-bold text-gray-900 tracking-wide hidden lg:block">
-                        <Link href=''>
+                        <Link href='/'>
                             Kamar Sains
                         </Link>
                     </h1>
