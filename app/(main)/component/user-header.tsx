@@ -1,0 +1,51 @@
+
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Nav from "@/components/ui/nav";
+import Key from "@/public/key.svg";
+import UserAvatar from "@/components/user-avatar";
+
+const UserHeader = () => {
+    return (
+        <div className="h-14 w-full border-b-2 bg-white px-4 fixed top-0 z-10">
+            <div className="lg:max-w-screen-xl mx-auto flex items-center justify-between h-full">
+                <div className=" flex items-center gap-x-3">
+                    <Link href='/home'>
+                        <Image
+                        src="/logo.svg"
+                        height={35}
+                        width={35}
+                        alt="Logo"
+                        className="lg:hidden"
+                        />
+                    </Link>
+                    
+                    <h1 className="text-2xl font-bold text-gray-900 tracking-wide hidden lg:block">
+                        <Link href='/home'>
+                            Kamar Sains
+                        </Link>
+                    </h1>
+                </div>
+                <div className="hidden lg:flex">
+                    <Nav/>   
+                </div>    
+                <div className="flex justify-center items-center gap-x-2">
+                    <Button variant="button" className="rounded-full text-xl gap-2 font-bold">
+                        <Image
+                            src={Key}
+                            width={14}
+                            height={14}
+                            alt="key"
+                        />
+                        <p>36</p>
+                    </Button>
+                    <UserAvatar />   
+                </div>
+            </div>
+            
+        </div>
+    )
+}
+
+export default UserHeader;

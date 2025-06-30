@@ -1,9 +1,9 @@
-import CtaSection from "./ctasection/ctasection";
-import FirstSection from "./firstsection/firstsection";
-import FooterSection from "./footersection/footersection";
-import SecondSection from "./secondsection/secondsection";
-import TertiarySection from "./tertiarysection/tertiarysection";
-import Welcome from "./welcome/welcome";
+import CtaSection from "./component/cta-section";
+import FirstSection from "./component/first-section";
+import FooterSection from "./component/footer-section";
+import SecondSection from "./component/second-section";
+import TertiarySection from "./component/tertiary-section";
+import Welcome from "./component/welcome";
 
 export default function Home() {
   return (

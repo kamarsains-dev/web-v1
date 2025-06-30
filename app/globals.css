@@ -120,6 +120,22 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+html,
+body,
+:root{
+  @apply h-full;
+}
+
+.rive-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 @layer base {
   :root {
       --color-whiteblue: #DCEFFF;
@@ -186,16 +202,35 @@
   .bg-hero-pattern {
     background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(14, 17, 51, 1));
   }
-
+  .bg-price {
+    background-image: linear-gradient(to top, #A0FBCD, #FFF600, #FFC8C9);
+  }
+  .bg-price-2 {
+    background-image: linear-gradient(to right, #a4a4a4, #f3f3f3, #a4a4a4);
+  }
   .bg-infobar-pattern {
     background-image: linear-gradient(to top, rgba(255, 232, 99, 1), rgba(255, 195, 0, 1));
   }
-
+  .bg-winstreak-bar{
+    background-image: linear-gradient(to right, #41289C, #003299, #00586C);
+  }
+  .bg-tryout-tabs{
+    background-image: linear-gradient(to top, #F7FFC7, white );
+  }
+  .bg-tryout-tabs-2 {
+    background-image: linear-gradient(to top, #DDF0FF, white);
+  }
   .bg-star-pattern {
     background-image: url('../public/bg-star.svg');
   }
   .bg-whiteblue {
     background-color: var(--color-whiteblue);
+  }
+  .bg-ads {
+    background-image: linear-gradient(to right, #0E2F61, #01251B)
+  }
+  .bg-ads-button {
+    background-image: linear-gradient(to right, #FFF600, #A0FBCD)
   }
 
   .bg-blue {
@@ -260,5 +295,10 @@
   }
   .text-darkgreen {
     color: var(--color-darkgreen);
+  }
+  .text-price {
+      background: -webkit-linear-gradient(right, #fe9a00, #ffea50, #fe9a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
   }
 }
