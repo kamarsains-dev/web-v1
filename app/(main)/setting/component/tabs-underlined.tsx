@@ -114,12 +114,6 @@ export default function TabsUnderlinedDemo() {
                     <Button variant='primary' className="max-w-[200px] w-full rounded-xl  text-sm h-12 mt-3">Simpan</Button>
                     </form>
             </div>
-            <div className="mt-15">
-                <h1 className="text-xl font-bold text-red-500">Danger Zone</h1>
-                <div className="w-full border-t border border-red-500 flex-grow my-5 "></div>
-                <p className="text-sm md:text-[15px] my-2 text-red-500">If you need to take a break or want to permanently delete your account, you can manage these options here.</p>    
-                <Button variant='outline' className="max-w-[200px] w-full rounded-xl bg-white hover:bg-red-100 border-red-500 font-bold text-red-500 text-sm h-12 mt-3">Hapus</Button>
-            </div>  
           </div>
         </TabsContent>
         <TabsContent value="preferences">
@@ -128,9 +122,52 @@ export default function TabsUnderlinedDemo() {
           </div>
         </TabsContent>
         <TabsContent value="security">
-          <div>
-            Security  
-          </div>
+            <div className="mt-5">
+                <div>
+                <h1 className="text-xl font-bold">Change Password</h1>
+                <div className="w-full border-t border border-gray-200 flex-grow my-5"></div>
+
+                <form className="flex flex-col gap-y-4 w-full">
+                        <div>
+                            <h3 className="my-2">Your Password</h3>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="Email"
+                                required
+                                className="w-full px-4 py-2 rounded-lg border"
+                            />
+                        </div>
+                        <div>
+                            <h3 className="my-2">New Password</h3>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Password"
+                                required
+                                className="w-full px-4 py-2 rounded-lg border"
+                            />    
+                        </div>
+                    <Button variant='primary' className="max-w-[200px] w-full rounded-xl  text-sm h-12 mt-3">Confirm</Button>
+                    </form>
+                </div>
+                <div className="mt-15">
+                    <h1 className="text-xl font-bold text-red-500">Danger Zone</h1>
+                    <div className="w-full border-t border border-red-500 flex-grow my-5 "></div>
+                    <p className="text-sm md:text-[15px] my-2 text-red-500">If you need to take a break or want to permanently delete your account, you can manage these options here.</p>    
+                    <Button variant='outline' className="max-w-[200px] w-full rounded-xl bg-white hover:bg-red-100 border-red-500 font-bold text-red-500 text-sm h-12 mt-3">Hapus</Button>
+                </div>  
+            </div>
+        </TabsContent>
+        <TabsContent value="payment">
+            <div className="mt-5">
+                <div>
+                    <h1 className="text-xl font-bold">Payment History</h1>
+                    <div className="w-full border-t border border-gray-200 flex-grow my-5"></div>
+                </div>
+            </div>
         </TabsContent>    
     </Tabs>
   );

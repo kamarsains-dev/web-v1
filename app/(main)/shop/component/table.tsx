@@ -1,11 +1,8 @@
-import Image from "next/image";
-import CheckList from "@/public/check.svg"
-
 const FeatureTable = () => {
     return (
         <div className="container flex flex-col justify-center items-center gap-y-6 pt-20 mb-14">
-            <h1 className="text-4xl lg:text-5xl font-bold text-[#F6FF00] text-center">No Gimmicks. Just Results.</h1>
-            <div className="bg-price p-1 rounded-2xl">
+            <h1 className="text-4xl lg:text-5xl font-bold text-white text-center">No Gimmicks. <a className="text-[#F6FF00]">Just Results.</a></h1>
+            <div className="bg-gradient-green p-1 rounded-2xl">
                 <div className="bg-hero-pattern rounded-xl">
                     <table className="w-full text-left table-row">
                     <thead>
@@ -47,14 +44,7 @@ const FeatureTable = () => {
                             <span className="text-[#F2F2F2] text-sm">{item.deskripsi}</span>
                             </td>
                             <td className="px-4 py-6 text-center text-red-400 text-2xl font-bold">x</td>
-                            <td className="pl-9 py-6">
-                                <Image
-                                    src={CheckList}
-                                    width={22}
-                                    height={22}
-                                    alt="check-icon"
-                                />
-                            </td>
+                            <td className="px-4 py-6 text-center text-[#A0FBCD] text-2xl font-bold">√</td>
                         </tr>
                         ))}
                     </tbody>

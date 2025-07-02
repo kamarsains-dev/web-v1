@@ -23,7 +23,7 @@ const buttonVariants = cva(
         active:" border border-2 border-gray-700 bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:hover:bg-input/50 transition-none",
         inactive:" bg-background hover:bg-accent grayscale-100 dark:bg-input/30 dark:border-input dark:hover:bg-input/50 transition-none",
         material:"bg-white text-slate-500 position-y-2 border-slate-300 border-2 border-b-4 active:border-b-2 hover:bg-slate-100 hover:border-b-4",
-        quinary: "bg-white text-[#58690D] position-y-2 border-[#DAF322] border-2 border-b-4 active:border-b-2 hover:bg-[#EDF7FF] hover:border-b-4",
+        quinary: "bg-[#375CE3] text-white position-y-2 border-[#213C9E] border-b-4 active:border-b-2 hover:bg-[#2B51DE] hover:border-b-4",
 
       },
       size: {

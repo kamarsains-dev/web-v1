@@ -23,14 +23,14 @@ const Price = () => {
     return (
         <div className="container flex flex-col text-center">
             <div className="text-white flex flex-col justify-center items-center pb-10 gap-y-2">
-                <h1 className="text-4xl lg:text-5xl font-bold">Small Cost. <a className="text-[#F6FF00]">Big Impact.</a></h1>
+                <h1 className="text-4xl lg:text-5xl font-bold text-white">Small Cost. <a className="text-[#F6FF00]">Big Impact.</a></h1>
                 <p className="lg:text-xl font-normal">Suatu hari, kamu akan sadar ini investasi terbaik.</p>
             </div>  
             <div className=" flex flex-col lg:flex-row gap-x-10 gap-y-4 justify-center items-center">
                 {price.map((price:IPrice) => (
-                    <div key={price.id} className="w-full max-w-md bg-price rounded-3xl lg:rounded-4xl  flex flex-col justify-between items-center border-b-8 border-[#095735] my-6 lg:my-2">
+                    <div key={price.id} className="w-full max-w-md bg-gradient-green rounded-3xl lg:rounded-4xl  flex flex-col justify-between items-center border-b-8 border-[#095735] my-6 lg:my-2">
                         <div className="w-full p-1.5">
-                            <h2 className="text-2xl font-bold text-[#A33636] my-2">{price.name}</h2>
+                            <h2 className="text-[28px] font-bold text-[#005C00] my-2">{price.name}</h2>
                             <div className="w-full bg-hero-pattern rounded-2xl lg:rounded-3xl p-5">
                                 <h1 className="text-5xl font-bold text-[#F6FF00] my-4">Rp. {price.price.toLocaleString('id-ID')}</h1>                       
                                 <span className="text-center text-white">

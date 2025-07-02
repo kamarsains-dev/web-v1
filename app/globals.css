@@ -232,6 +232,9 @@ body,
   .bg-ads-button {
     background-image: linear-gradient(to right, #FFF600, #A0FBCD)
   }
+  .bg-gradient-green {
+    background-image: linear-gradient(to top, #A0FBCD, #F4FE68)
+  }
 
   .bg-blue {
     background-color: var(--color-blue);

@@ -9,29 +9,26 @@ function Progress({
   className,
   value,
   ...props
-}: React.ComponentProps<typeof ProgressPrimitive.Root>) {
+}: React.ComponentProps<typeof ProgressPrimitive.Root> & { value: number }) {
   return (
-    <div className="mt-18 md:mt-14">
-        <div className="flex justify-between text-sm font-medium text-gray-800">
-            <p>Target</p>
-            <p>{value}</p>
-        </div>
-        <ProgressPrimitive.Root
-        data-slot="progress"
-        className={cn(
-            "bg-primary/20 relative h-3 w-full overflow-hidden rounded-full",
-            className
-        )}
-        {...props}
-        >
-        <ProgressPrimitive.Indicator
-            data-slot="progress-indicator"
-            className="bg-[#37ED58] h-full w-full flex-1 transition-all"
-            style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-        />
-        </ProgressPrimitive.Root>    
-    </div>
-    
+    <ProgressPrimitive.Root
+      data-slot="progress"
+      className={cn(
+        "relative  w-full overflow-hidden rounded-full bg-primary/20 my-1",
+        className
+      )}
+      {...props}
+    >
+      <ProgressPrimitive.Indicator
+        data-slot="progress-indicator"
+        className="bg-[#37ED58] h-full transition-all flex items-center justify-center text-xs font-semibold text-white"
+        style={{
+          width: `${value}%`,
+        }}
+      >
+        <span className="z-10 text-green-900 font-bold">{value}%</span>
+      </ProgressPrimitive.Indicator>
+    </ProgressPrimitive.Root>
   )
 }
 
