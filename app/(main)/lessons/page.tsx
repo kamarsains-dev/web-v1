@@ -1,10 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import MaterialButtons from "./component/material-button";
-import { getLessons, getUserProgress } from "@/lib/queries";
+import { getLessons } from "@/lib/queries";
 
 const Lessons = async () => {
     const lessons = await getLessons();
-    const userProgress = await getUserProgress();
 
     return(
         <div className="w-full max-w-[1200px] flex-col justify-center items-center text-center container pb-20 mt-13">
