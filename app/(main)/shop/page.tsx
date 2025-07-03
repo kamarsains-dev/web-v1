@@ -5,7 +5,7 @@ import Price from "./component/price";
 
 const Shop = () => {
     return (
-        <div className=" bg-hero-pattern">
+        <div className=" bg-hero-pattern mt-13">
             <div className="w-full bg-star-pattern flex flex-col justify-center items-center gap-y-4 py-12">
                 <Image
                 src={Key}
