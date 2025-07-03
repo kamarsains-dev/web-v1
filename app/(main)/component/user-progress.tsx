@@ -12,7 +12,7 @@ const UserProgress = () => {
                     width={100}
                     height={100}
                     alt="thunder"
-                    className="w-14"
+                    className="w-10"
                     quality={100}
                 />
                 <div className="w-full">

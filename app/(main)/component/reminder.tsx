@@ -28,7 +28,7 @@ const Reminder = () => {
                 />
                 <div>
                     <h1 className="text-lg text-black font-bold">{coundtdown} Hari Menuju UTBK</h1>
-                    <p className="text-sm">Suatu hari, kamu akan sadar ini investasi terbaik.</p>
+                    <p className="text-sm">Capai target skormu sebelum UTBK datang.</p>
                 </div>
             </div>
         </div>

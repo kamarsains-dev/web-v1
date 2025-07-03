@@ -14,7 +14,7 @@ const Leaderboard = () => {
                 />
                 <div>
                     <h1 className="text-lg text-black font-bold">Papan Peringkat</h1>
-                    <p className="text-sm">Capai target skormu sebelum UTBK datang.</p>
+                    <p className="text-sm">Selesaikan satu try out untuk melihat peringkatmu.</p>
                 </div>
             </div>
         </div>
