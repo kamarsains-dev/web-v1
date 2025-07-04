@@ -1,4 +1,3 @@
-
 import TabsUnderlinedDemo from "./component/tabs-underlined";
 
 const Setting = () => {

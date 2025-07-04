@@ -1,7 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { createClient } from "@/lib/supabase/server";
 
-export default function TabsUnderlinedDemo() {
+export default async function TabsUnderlinedDemo() {
+
+    const supabase = await createClient();
+
+    const { data, error } = await supabase.auth.getUser();
+    if (error || !data?.user) {
+        return null;
+    }
+    const getEmail = (email?: string) => {
+        return email;
+    }
+
+
   return (
     <Tabs defaultValue="profile">
       <TabsList className="w-full p-0 bg-background justify-start border-b rounded-none">
@@ -39,14 +52,14 @@ export default function TabsUnderlinedDemo() {
 
               <form className="flex flex-col gap-y-4 w-full">
                     <div>
-                        <h3 className="my-2">Nama</h3>
+                        <h3 className="my-2">Email</h3>
                         <input
                             id="email"
                             name="email"
                             type="email"
-                            placeholder="Email"
-                            required
-                            className="w-full px-4 py-2 rounded-lg border"
+                            disabled
+                            placeholder={getEmail(data?.user.email)}
+                            className="w-full px-4 py-2 rounded-lg border cursor-not-allowed"
                         />
                     </div>
                     <div>
