@@ -28,9 +28,9 @@ const Price = () => {
             </div>  
             <div className=" flex flex-col lg:flex-row gap-x-10 gap-y-4 justify-center items-center">
                 {price.map((price:IPrice) => (
-                    <div key={price.id} className="w-full max-w-md bg-gradient-green rounded-3xl lg:rounded-4xl  flex flex-col justify-between items-center border-b-8 border-[#095735] my-6 lg:my-2">
+                    <div key={price.id} className="w-full max-w-md bg-gradient-purple rounded-3xl lg:rounded-4xl  flex flex-col justify-between items-center border-b-8 border-[#2C0061] my-6 lg:my-2">
                         <div className="w-full p-1.5">
-                            <h2 className="text-[28px] font-bold text-[#005C00] my-2">{price.name}</h2>
+                            <h2 className="text-[28px] font-bold text-[#17005C] my-2">{price.name}</h2>
                             <div className="w-full bg-hero-pattern rounded-2xl lg:rounded-3xl p-5">
                                 <h1 className="text-5xl font-bold text-[#F6FF00] my-4">Rp. {price.price.toLocaleString('id-ID')}</h1>                       
                                 <span className="text-center text-white">

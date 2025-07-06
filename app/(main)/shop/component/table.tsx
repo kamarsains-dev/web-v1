@@ -2,7 +2,7 @@ const FeatureTable = () => {
     return (
         <div className="container flex flex-col justify-center items-center gap-y-6 pt-20 mb-14">
             <h1 className="text-4xl lg:text-5xl font-bold text-white text-center">No Gimmicks. <a className="text-[#F6FF00]">Just Results.</a></h1>
-            <div className="bg-gradient-green p-1 rounded-2xl">
+            <div className="bg-gradient-purple p-1 rounded-2xl">
                 <div className="bg-hero-pattern rounded-xl">
                     <table className="w-full text-left table-row">
                     <thead>

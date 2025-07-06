@@ -11,7 +11,7 @@ const Content = () => {
             </div>
             <div className="my-4">
                 <h1 className="text-2xl font-bold">Try Out</h1>
-                <p className="text-[#375CE3]">Serius - 135 Menit</p>
+                <p className="text-[#375CE3]">Serius - 135 menit</p>
             </div>
             <Link href='/tryout' className="w-full text-center">
                 <Button variant='quinary' sweep className="w-full h-14 rounded-xl ">

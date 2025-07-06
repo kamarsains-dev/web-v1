@@ -135,7 +135,7 @@ body,
   justify-content: center;
 }
 .level-animation {
-  position: absolute;
+  position: relative;
   height: 40%;
   width: 40%;
   display: flex;
@@ -235,13 +235,16 @@ body,
     background-color: var(--color-whiteblue);
   }
   .bg-ads {
-    background-image: linear-gradient(to right, #0E2F61, #01251B)
+    background-image: linear-gradient(to right, #000E52, #390060)
   }
   .bg-ads-button {
     background-image: linear-gradient(to right, #FFF600, #A0FBCD)
   }
   .bg-gradient-green {
     background-image: linear-gradient(to top, #A0FBCD, #F4FE68)
+  }
+  .bg-gradient-purple {
+    background-image: linear-gradient(to right, #7EFFDF, #42A1FF, #F42BFF)
   }
 
   .bg-blue {

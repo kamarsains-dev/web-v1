@@ -59,6 +59,9 @@ const ButtonPage = () => {
             <Button variant="quinary">
                 Primary
             </Button>
+            <Button variant="septenary">
+                Septenary
+            </Button>
             <div>
             <Tabs defaultValue="account" className="w-[400px]">
                 <TabsList>

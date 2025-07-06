@@ -20,7 +20,7 @@ const Ads = () => {
                 </div>
             </div>
             <Link href='/shop' className="w-full flex justify-center items-center text-center">
-                <Button sweep variant='tertiary' className="w-full rounded-xl bg-ads-button border-[#4F8800] font-bold text-[#0C0E39] text-lg h-14">
+                <Button sweep variant='septenary' className="w-full rounded-xl font-bold text-lg h-14">
                     <p className="my-1">Invest Now!</p>
                 </Button>
             </Link> 
