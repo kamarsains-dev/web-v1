@@ -1,11 +1,7 @@
-import { getUserProgress } from "@/lib/queries";
-import { redirect } from "next/navigation";
 
 
 const Learn = async () => {
-    const userProgressData = await getUserProgress();
 
-    const [ userProgress ] = await Promise.all([userProgressData]);
 
     
     return(

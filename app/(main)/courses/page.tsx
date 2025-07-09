@@ -6,6 +6,7 @@ const Courses = async () => {
     const coursesData = await getCourses();
     const userProgressData = await getUserProgress();
 
+    const [ courses, userData ] = await Promise.all([coursesData, userProgressData])
 
     return(
         <div className="w-full max-w-[1200px] flex flex-col justify-center items-center text-center container pb-20 mt-13 ">
