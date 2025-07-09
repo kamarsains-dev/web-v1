@@ -246,6 +246,9 @@ body,
   .bg-gradient-purple {
     background-image: linear-gradient(to right, #7EFFDF, #42A1FF, #F42BFF)
   }
+  .border-gradient-purple {
+    border-image-source: linear-gradient(to right, #743ad5, #d53a9d);
+  }
 
   .bg-blue {
     background-color: var(--color-blue);

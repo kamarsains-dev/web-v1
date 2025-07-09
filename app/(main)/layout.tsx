@@ -22,7 +22,7 @@ export default async function MainLayout ({
         <>
             <main>
                 <UserHeader/>
-                <div className="">
+                <div>
                     {children}
                 </div>
                 <MobileNav/>

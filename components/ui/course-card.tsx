@@ -1,20 +1,28 @@
-import Link from "next/link";
+'use client'
+
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { upsertUserProgress } from "@/lib/actions/user-progress";
 
-type Props = {
+type CardProps = {
+    id: number;
     title: string;
-    href: string;
+    slug: string;
+    badge: string;
     icon: string;
-    badge?: string;
-
+    isActive: boolean;
 }
 
-const MaterialButtons = ({ title, href, icon, badge}: Props) => {
+const CourseCard = ({ id, title, badge, icon }: CardProps) => {
+    
+    const handleActive = async () => {
+        await upsertUserProgress(id);
+    }
+
     return (
-        <div className="mt-4 lg:mt-0">
-            <Link href={href}>
-                <div className="relative flex items-center justify-start gap-4 bg-white border-2 border-b-4 border-gray-200 rounded-xl px-4 py-5 w-full h-[100px] hover:border-gray-300 transition">
+        <div>
+            <button onClick={handleActive}>
+                <div className="relative flex items-center justify-start gap-4 bg-white border-2 border-b-4 border-gray-200 rounded-xl px-4 py-5 w-full max-w-3xl h-[100px] hover:border-gray-300 transition">
                     <div className="absolute top-2 right-2">
                         <Badge className="bg-green-100 text-green-600 font-semibold px-3 py-1 rounded-full text-xs">
                             {badge}
@@ -29,11 +37,11 @@ const MaterialButtons = ({ title, href, icon, badge}: Props) => {
                             className="lg:mr-3 max-w-14"
                         />
                     </div>
-                <h1 className="text-md font-medium text-gray-800 text-left">{title}</h1>
+                    <h1 className="text-md font-medium text-gray-800 text-left">{title}</h1>
                 </div>
-            </Link>
+            </button>
         </div>
     )
 }
 
-export default MaterialButtons;
+export default CourseCard;

@@ -2,6 +2,7 @@ import { signup } from '../actions'
 import { Button } from '@/components/ui/button'
 import Google from '@/public/google.svg';
 import Image from "next/image";
+import SignUpForm from '../_component/signup-form';
 
 export default async function SignUpPage() { 
   return (
@@ -29,22 +30,7 @@ export default async function SignUpPage() {
           
         </div>
         <form className="flex flex-col gap-y-4 mt-4 w-full">
-          <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email"
-              required
-              className="w-full px-4 py-3 rounded-xl border-2"
-          />
-          <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Password"
-              required
-              className="w-full px-4 py-3 rounded-xl border-2"
-          />
+          <SignUpForm />
           <Button variant="outline" formAction={signup} className="w-full h-13 rounded-xl">
             <div className="flex justify-center items-center gap-x-2 my-1 text-[15px]">
               <p>Sign Up</p>
