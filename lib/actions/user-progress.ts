@@ -20,6 +20,7 @@ export const upsertUserProgress = async (courseId:number) => {
     const existingUserProgress = await getUserProgress();
 
     if (existingUserProgress) {
+        
         const { error: updateError } = await supabase.from("user_progress").update({
             active_courses_id: courseId,
             user_name: user?.email || "user",
@@ -45,10 +46,16 @@ export const upsertUserProgress = async (courseId:number) => {
             console.log("user data succsess", data)
         }
     };
+    const success = redirect(`/courses/${course.slug}`);
+
+    if (success) {
+        revalidatePath("/courses");
+        revalidatePath(`/courses/${course.slug}`);    
+    } else {
+        console.log("Failed to revalidate path")
+    }
     
-    revalidatePath("/courses");
-    revalidatePath(`/courses/${course.slug}`);
-    redirect(`/courses/${course.slug}`)
+    
     
     
 

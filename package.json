@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "tsx ./scripts/seed.ts"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
@@ -26,6 +27,7 @@
     "better-auth": "^1.2.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.0",
     "embla-carousel-react": "^8.6.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.482.0",
@@ -49,6 +51,7 @@
     "eslint-config-next": "15.2.2",
     "tailwindcss": "^4",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }
