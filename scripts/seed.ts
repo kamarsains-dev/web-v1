@@ -8,8 +8,13 @@ const seed = async () => {
 
     await supabase.from("courses").delete().neq("id", "");
     await supabase.from("user_progress").delete().neq("id", "");
+    await supabase.from("units").delete().neq("id", "");
+    await supabase.from("lessons").delete().neq("id", "");
+    await supabase.from("challenges").delete().neq("id", "");
+    await supabase.from("challenge_options").delete().neq("id", "");
+    await supabase.from("challenge_progress").delete().neq("id", "");
 
-    const { data, error } = await supabase.from("courses").insert([
+    const { data, error } = await supabase.from("courses").upsert([
       {
         id: 1,
         title: "Penalaran Matematika",
@@ -30,6 +35,99 @@ const seed = async () => {
         console.error("Error seeding data:", error);
     } else {
         console.log("Data seeded successfully:", data);
+    }
+
+    const { error: unitError } = await supabase.from("units").upsert([
+      {
+        id: 1,
+        course_id: 1,
+        title: "Unit 1",
+        description: "Belajar penalaran matematika",
+        order: 1,
+      },
+    ]);
+
+    if (unitError) {
+      console.log("Error seeding units", unitError)
+    }
+
+    const { error: lessonsError } = await supabase.from("lessons").upsert([
+      {
+        id: 1,
+        unit_id: 1,
+        order: 1,
+        title: "Penjumlahan",
+      },
+      {
+        id: 2,
+        unit_id: 1,
+        order: 2,
+        title: "Pengurangan",
+      },
+    ]);
+
+    if (lessonsError) {
+      console.log("Error seeding lessons", lessonsError);
+    }
+
+    const { error: challengesError } = await supabase.from("challenges").upsert([
+      {
+        id: 1,
+        lesson_id: 1,
+        type: "SELECT",
+        order: 1,
+        question: "Tentukan hasil dari 2 + 3",
+      },
+      {
+        id: 2,
+        lesson_id: 1,
+        type: "ASSIST",
+        order: 2,
+        question: "Tentukan hasil dari 10 - 3",
+      },
+    ]);
+
+    if (challengesError) {
+      console.log("Error seeding challenges", challengesError);
+    }
+
+    const { error: challengeOptionsError } = await supabase
+      .from("challenge_options")
+      .upsert([
+        {
+          id: 1,
+          challenge_id: 1,
+          correct: true,
+          text: "5",
+        },
+        {
+          id: 2,
+          challenge_id: 1,
+          correct: false,
+          text: "7",
+        },
+        {
+          id: 3,
+          challenge_id: 1,
+          correct: false,
+          text: "2",
+        },
+        {
+          id: 4,
+          challenge_id: 1,
+          correct: false,
+          text: "3",
+        },
+        {
+          id: 5,
+          challenge_id: 1,
+          correct: false,
+          text: "6",
+        },
+      ]);
+
+    if (challengeOptionsError) {
+      console.log("Error seeding challenges", challengeOptionsError);
     }
 }
 

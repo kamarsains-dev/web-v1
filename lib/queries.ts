@@ -1,6 +1,5 @@
 import { cache } from "react";
 import { createClient } from "./supabase/server";
-import supabase from "./db";
 
 export const getUserProgress = cache(async () => {
     const supabase = await createClient();
@@ -26,6 +25,7 @@ export const getUserProgress = cache(async () => {
 })
 
 export const getCourses = cache(async () => {
+    const supabase = await createClient()
     const {data, error} = await supabase.from("courses").select("*").order("id", {ascending: true});
 
     if(error) throw(error);
@@ -33,6 +33,8 @@ export const getCourses = cache(async () => {
 });
 
 export const getCourseById = cache(async (courseId: number) => {
+    const supabase = await createClient();
+
     if (!courseId) return null;
 
     const { data, error } = await supabase
