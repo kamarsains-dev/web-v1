@@ -4,7 +4,7 @@ import InfoCard from "./component/info-card";
 
 const TryOut = () => {
     return (
-        <div className="container flex flex-row-reverse gap-[48px] px-6 justify-center items-center">
+        <div className="container flex flex-row-reverse gap-[48px] px-6 justify-center items-center mt-13">
             <StickyWrapper>
                 <InfoCard/>
                 <InfoCard/>

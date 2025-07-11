@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button";
 import Nav from "@/components/ui/nav";
 import Key from "@/public/key.svg";
 import UserAvatar from "@/components/user-avatar";
+import { getUserProgress } from "@/lib/queries";
 
-const UserHeader = () => {
+const UserHeader = async () => {
+    const userProgressData = await getUserProgress();
+
     return (
         <div className="h-14 w-full border-b-2 bg-white px-4 fixed top-0 z-20">
             <div className="lg:max-w-screen-xl mx-auto flex items-center justify-between h-full">
@@ -38,7 +41,7 @@ const UserHeader = () => {
                             height={14}
                             alt="key"
                         />
-                        <p>36</p>
+                        <p>{userProgressData.keys}</p>
                     </Button>
                     <UserAvatar />   
                 </div>
