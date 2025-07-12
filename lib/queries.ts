@@ -85,7 +85,7 @@ export const getUnits = cache(async() => {
 
     const { data, error } = await supabase
     .from( "units")
-    .select("*")
+    .select("*, lessons(*, challenges(*, challenge_progress(*)))")
     .eq("course_id", userProgress.active_courses_id)
 
     if (!data || error) {
