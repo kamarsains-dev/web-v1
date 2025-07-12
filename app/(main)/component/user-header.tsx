@@ -41,7 +41,7 @@ const UserHeader = async () => {
                             height={14}
                             alt="key"
                         />
-                        <p>{userProgressData.keys}</p>
+                        <p>{userProgressData?.keys ?? 0}</p>
                     </Button>
                     <UserAvatar />   
                 </div>

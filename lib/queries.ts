@@ -46,4 +46,75 @@ export const getCourseById = cache(async (courseId: number) => {
     if (error) throw(error);
 
     return data;
-})
+});
+
+type ChallengeProgress = {
+  completed: boolean;
+};
+
+type Challenge = {
+  id: number;
+  lesson_id: number;
+  question: string;
+  challenge_progress: ChallengeProgress[];
+};
+
+type Lesson = {
+  id: number;
+  unit_id: number;
+  title: string;
+  challenges: Challenge[];
+};
+
+type Unit = {
+  id: number;
+  title: string;
+  description: string;
+  course_id: number;
+  lessons: Lesson[];
+};
+  
+
+export const getUnits = cache(async() => {
+    const supabase = await createClient();
+    const userProgress = await getUserProgress();
+
+    if(!userProgress.active_courses_id) {
+        return [];
+    }
+
+    const { data, error } = await supabase
+    .from( "units")
+    .select("*")
+    .eq("course_id", userProgress.active_courses_id)
+
+    if (!data || error) {
+        console.error("No units found for the active course", error);
+        return [];
+    }
+    console.log("units data", data);
+
+
+    const normalizedData = data.map((unit: Unit) => {
+        const lessonsWithCompletedStatus = unit.lessons?.map((lesson) =>{
+            const allCompletedChallenges = lesson.challenges.every((challenge) =>
+            challenge.challenge_progress &&
+            challenge.challenge_progress.length > 0 &&
+            challenge.challenge_progress.every((progress) => progress.completed)
+            );
+
+            return { 
+            ...lesson, completed: allCompletedChallenges
+            };
+        });
+        
+        return {
+            ...unit,
+            lessons: lessonsWithCompletedStatus
+        };    
+    });
+    return normalizedData;
+
+
+    
+});
