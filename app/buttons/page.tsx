@@ -57,7 +57,10 @@ const ButtonPage = () => {
                 Primary
             </Button>
             <Button variant="quinary">
-                Primary
+                quinary
+            </Button>
+            <Button variant="quinaryBorder">
+                quinary border
             </Button>
             <Button variant="septenary">
                 Septenary

@@ -24,6 +24,7 @@ const buttonVariants = cva(
         inactive:" bg-background hover:bg-accent grayscale-100 dark:bg-input/30 dark:border-input dark:hover:bg-input/50 transition-none",
         material:"bg-white text-slate-500 position-y-2 border-slate-300 border-2 border-b-4 active:border-b-2 hover:bg-slate-100 hover:border-b-4",
         quinary: "bg-[#375CE3] text-white position-y-2 border-[#213C9E] border-b-4 active:border-b-2 hover:bg-[#2B51DE] hover:border-b-4",
+        quinaryBorder: "bg-white border-2 position-y-2 border-[#213C9E] border-b-4 active:border-b-2  hover:border-b-4",
         septenary: "bg-gradient-purple text-[#160B74] position-y-2 border-[#5503B9] border-b-4 active:border-b-2 hover:bg-[#2B51DE] hover:border-b-4",
 
       },
