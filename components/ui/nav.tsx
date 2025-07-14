@@ -6,8 +6,8 @@ const Nav = () => {
             <NavbarItem label="Home" href="/home" iconSrc="/home.svg"/>
             <NavbarItem label="Courses" href="/courses" iconSrc="/cards-blank.svg"/>
             <NavbarItem label="Shop" href="/shop" iconSrc="/key-hole.svg"/>
-            <NavbarItem label="Leaderboard" href="/leaderboard" iconSrc="crown.svg"/>
-            <NavbarItem label="Analytic" href="/analytic" iconSrc="analytic.svg"/>
+            <NavbarItem label="Leaderboard" href="/leaderboard" iconSrc="/crown.svg"/>
+            <NavbarItem label="Analytic" href="/analytic" iconSrc="/analytic.svg"/>
         </div>   
     );
 };

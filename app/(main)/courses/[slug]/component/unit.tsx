@@ -4,6 +4,7 @@ import UnitBanner from "./unit-banner";
 type Lesson = {
     id: number;
     completed: boolean;
+    title: string;
 }
 
 type Props = {    
@@ -33,12 +34,12 @@ export const Unit = ({ title, description, activeLesson, activeLessonPersentage,
                         <LessonButton
                             key={lesson.id}
                             id={lesson.id}
+                            title={lesson.title}
                             index={index}
                             totalCount={lessons.length - 1}
                             current={isCurrent}
                             locked={isLocked}
                             percentage={activeLessonPersentage}
-
                         />
                     )
                 })}

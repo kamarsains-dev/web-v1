@@ -64,6 +64,48 @@ const seed = async () => {
         order: 2,
         title: "Pengurangan",
       },
+      {
+        id: 3,
+        unit_id: 1,
+        order: 3,
+        title: "Pembagian",
+      },
+      {
+        id: 4,
+        unit_id: 1,
+        order: 4,
+        title: "Perkalian",
+      },
+      {
+        id: 5,
+        unit_id: 1,
+        order: 5,
+        title: "Aritmatika",
+      },
+      {
+        id: 6,
+        unit_id: 1,
+        order: 6,
+        title: "Aljabar",
+      },
+      {
+        id: 8,
+        unit_id: 1,
+        order: 7,
+        title: "Geometri",
+      },
+      {
+        id: 9,
+        unit_id: 1,
+        order: 9,
+        title: "Statistika",
+      },
+      {
+        id: 10,
+        unit_id: 1,
+        order: 10,
+        title: "kalkulus",
+      },
     ]);
 
     if (lessonsError) {

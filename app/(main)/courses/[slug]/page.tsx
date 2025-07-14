@@ -17,7 +17,7 @@ const Learn = async () => {
     }
 
     return(
-        <div className="container flex flex-row-reverse gap-[48px] px-6 justify-center mt-20">
+        <div className="container flex flex-row-reverse gap-[48px] justify-center mt-20 pb-20">
             <StickyWrapper>
                 <InfoCard/>
             </StickyWrapper>
@@ -28,65 +28,7 @@ const Learn = async () => {
                             <Unit                       
                                 description={unit.description}
                                 title={unit.title}
-                                lessons={[
-                                    {
-                                        id: 1,
-                                        completed: true
-                                    },
-                                    {
-                                        id: 2,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 3,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 4,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 5,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 6,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 7,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 8,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 3,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 4,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 5,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 6,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 7,
-                                        completed: false
-                                    },
-                                    {
-                                        id: 8,
-                                        completed: false
-                                    }
-                                    
-                                ]} //unit.lessons
+                                lessons={unit.lessons} //unit.lessons
                                 activeLesson={null}
                                 activeLessonPersentage={0}
                             />

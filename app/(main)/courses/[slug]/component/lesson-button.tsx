@@ -14,9 +14,10 @@ type Props = {
     locked?: boolean;
     current?: boolean;
     percentage: number;
+    title: string;
 };
 
-export const LessonButton = ({id, index, locked, current}: Props) => { //add percentage, totalCounts
+export const LessonButton = ({id, index, locked, current, title}: Props) => { //add percentage, totalCounts
     const cycleLength = 5;
     const cycleIndex = index % cycleLength;
 
@@ -45,16 +46,17 @@ export const LessonButton = ({id, index, locked, current}: Props) => { //add per
 
     return (
         <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>
-            <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted ? 20 : 40}}>
+            <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted ? 40 : 60}}>
                 {current ? (
                     <div className="w-[128px] h-[128px] relative flex justify-center items-center">
                         <div>
                             <Image 
-                                src={Current}
+                                src={ locked ? Locked : Current}
                                 alt=""
                                 width={300}
                                 height={300}
                             />
+                            <h1 className="mt-2 text-sm font-medium">{title}</h1>
                         </div>
                     </div>
                 ) : (
@@ -67,6 +69,7 @@ export const LessonButton = ({id, index, locked, current}: Props) => { //add per
                                     width={300}
                                     height={300}
                                 />
+                                <h1 className="mt-2 text-sm font-medium">{title}</h1>
                             </div>
                         </div>
                     </div>
