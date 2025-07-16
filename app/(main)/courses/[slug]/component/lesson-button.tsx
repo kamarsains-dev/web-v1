@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Current from "@/public/current.svg"
 import Locked from "@/public/locked.svg"
+import { useParams } from "next/navigation";
+
 
 type Props = {
     id: number;
@@ -17,7 +19,9 @@ type Props = {
     title: string;
 };
 
-export const LessonButton = ({id, index, locked, current, title}: Props) => { //add percentage, totalCounts
+export const LessonButton = ({index, locked, current, title}: Props) => { //add percentage, totalCounts
+    const {slug} = useParams();
+
     const cycleLength = 5;
     const cycleIndex = index % cycleLength;
 
@@ -40,9 +44,8 @@ export const LessonButton = ({id, index, locked, current, title}: Props) => { //
    // const isLast = index === totalCount;
     const isCompleted = !current && !locked
 
-   // const Icon = isCompleted ? Check : isLast ? Crown : Star;
 
-    const href = isCompleted ? `/${id}` : "/lesson";
+    const href = isCompleted ? `${slug}/${title.toLowerCase().replace(/\s+/g, "-")}` : `${slug}`;
 
     return (
         <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>

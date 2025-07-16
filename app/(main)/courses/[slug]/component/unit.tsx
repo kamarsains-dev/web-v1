@@ -1,6 +1,7 @@
 import { LessonButton } from "./lesson-button";
 import UnitBanner from "./unit-banner";
 
+
 type Lesson = {
     id: number;
     completed: boolean;
@@ -40,6 +41,7 @@ export const Unit = ({ title, description, activeLesson, activeLessonPersentage,
                             current={isCurrent}
                             locked={isLocked}
                             percentage={activeLessonPersentage}
+
                         />
                     )
                 })}

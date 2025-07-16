@@ -57,54 +57,63 @@ const seed = async () => {
         unit_id: 1,
         order: 1,
         title: "Penjumlahan",
+        slug: "penjumlahan"
       },
       {
         id: 2,
         unit_id: 1,
         order: 2,
         title: "Pengurangan",
+        slug: "pengurangan"
       },
       {
         id: 3,
         unit_id: 1,
         order: 3,
         title: "Pembagian",
+        slug: "pembagian"
       },
       {
         id: 4,
         unit_id: 1,
         order: 4,
         title: "Perkalian",
+        slug: "perkalian"
       },
       {
         id: 5,
         unit_id: 1,
         order: 5,
         title: "Aritmatika",
+        slug: "aritmatika"
       },
       {
         id: 6,
         unit_id: 1,
         order: 6,
         title: "Aljabar",
+        slug: "aljabar"
       },
       {
         id: 8,
         unit_id: 1,
         order: 7,
         title: "Geometri",
+        slug: "geometri"
       },
       {
         id: 9,
         unit_id: 1,
         order: 9,
         title: "Statistika",
+        slug: "statistika"
       },
       {
         id: 10,
         unit_id: 1,
         order: 10,
         title: "kalkulus",
+        slug: "kalkulus"
       },
     ]);
 

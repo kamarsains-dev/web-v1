@@ -119,7 +119,37 @@ export const getUnits = cache(async() => {
         };    
     });
     return normalizedData;
-
-
-    
 });
+
+export const getCourseProgress = cache (async() => {
+    const supabase = await createClient();
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    const userId = userData.user?.id;
+    const userProgress = await getUserProgress(); 
+
+    if(!userId || userError || !userProgress.active_courses_id) {
+        console.log("Error to get userId or user progress", userError)
+    }
+
+    const { data, error } = await supabase
+    .from("units")
+    .select("*, lessons(*, challenges(*, challenges_progress(*)))")
+    .order("order")
+    .eq("challenges_progress", userProgress.user_id)
+
+    if (!data || error) {
+        console.log("No units progress found", error)
+    }
+
+    const firstUncompletedLesson = data?.flatMap((unit: Unit) => unit.lessons)
+    .find ((lesson)=> {
+        return lesson.challenges.some((challenge) => {
+            return !challenge.challenge_progress || challenge.challenge_progress.length === 0;
+        });
+    });
+    
+    return {
+        activeLesson : firstUncompletedLesson,
+        activeLessonId : firstUncompletedLesson?.id,
+    }
+})

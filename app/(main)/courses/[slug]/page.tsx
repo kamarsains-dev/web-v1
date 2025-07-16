@@ -17,7 +17,7 @@ const Learn = async () => {
     }
 
     return(
-        <div className="container flex flex-row-reverse gap-[48px] justify-center mt-20 pb-20">
+        <div className=" max-w-[1300px] container flex flex-row-reverse justify-center mt-20 pb-20">
             <StickyWrapper>
                 <InfoCard/>
             </StickyWrapper>
