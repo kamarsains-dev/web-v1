@@ -1,4 +1,4 @@
-import { getUnits, getUserProgress } from "@/lib/queries";
+import { getUnits, getUserProgress, getCourseProgress, getLessonPercentage } from "@/lib/queries";
 import { redirect } from "next/navigation";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { FeedWrapper } from "@/components/feed-wrapper";
@@ -7,12 +7,14 @@ import { Unit } from "./component/unit";
 
 
 const Learn = async () => {
-    const userProgressData = await getUserProgress();
-    const unitsData = await getUnits();
+    const userProgressData = getUserProgress();
+    const unitsData = getUnits();
     // const courseData = await getCourseById(userProgressData?.active_courses_id); // add getCourseById in lib/queries
-    const [ userProgress, units ] = await Promise.all([userProgressData, unitsData]);
+    const courseProgressData = getCourseProgress();
+    const lessonPercentageData = getLessonPercentage();
+    const [ userProgress, units, courseProgress, lessonPercentage ] = await Promise.all([userProgressData, unitsData, courseProgressData, lessonPercentageData]);
 
-    if (!userProgress || !userProgress.active_courses_id) {
+    if (!userProgress || !userProgress.active_courses_id || !courseProgress) {
         redirect("/courses");
     }
 
@@ -29,8 +31,8 @@ const Learn = async () => {
                                 description={unit.description}
                                 title={unit.title}
                                 lessons={unit.lessons} //unit.lessons
-                                activeLesson={null}
-                                activeLessonPersentage={0}
+                                activeLesson={courseProgress.activeLesson}
+                                activeLessonPersentage={lessonPercentage}
                             />
                         </div>
                         

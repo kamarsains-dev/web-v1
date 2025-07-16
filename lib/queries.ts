@@ -65,6 +65,7 @@ type Lesson = {
   unit_id: number;
   title: string;
   challenges: Challenge[];
+  completed: boolean;
 };
 
 type Unit = {
@@ -99,6 +100,9 @@ export const getUnits = cache(async() => {
 
     const normalizedData = data.map((unit: Unit) => {
         const lessonsWithCompletedStatus = unit.lessons?.map((lesson) =>{
+            if (lesson.challenges.length === 0) {
+                return{ ...lesson, completed: false}
+            }
             const allCompletedChallenges = lesson.challenges.every((challenge) => {
                 const userProgressData = challenge.challenge_progress?.filter((progress) => progress.user_id === userId) ?? [];
                 
@@ -133,9 +137,8 @@ export const getCourseProgress = cache (async() => {
 
     const { data, error } = await supabase
     .from("units")
-    .select("*, lessons(*, challenges(*, challenges_progress(*)))")
-    .order("order")
-    .eq("challenges_progress", userProgress.user_id)
+    .select("*, lessons(*, challenges(*, challenge_progress(*)))")
+    .order("order", {ascending: true})
 
     if (!data || error) {
         console.log("No units progress found", error)
@@ -144,12 +147,75 @@ export const getCourseProgress = cache (async() => {
     const firstUncompletedLesson = data?.flatMap((unit: Unit) => unit.lessons)
     .find ((lesson)=> {
         return lesson.challenges.some((challenge) => {
-            return !challenge.challenge_progress || challenge.challenge_progress.length === 0;
+            const userProgressData = challenge.challenge_progress?.filter((progress) => progress.user_id === userId) ?? [] 
+
+            return (
+              userProgressData.length === 0 ||
+              userProgressData.some((progress) => progress.completed === false)
+            );
         });
     });
     
     return {
         activeLesson : firstUncompletedLesson,
         activeLessonId : firstUncompletedLesson?.id,
+    };
+});
+
+export const getLesson = cache(async (id?:number) => {
+    const supabase = await createClient();
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    const userId = userData.user?.id;   
+
+    if(!userId || userError) {
+        return null;
     }
+
+    const courseProgress = await getCourseProgress();
+    
+    const lessonId = id || courseProgress?.activeLessonId
+    
+    if (!lessonId) {
+        return null;
+    }
+
+    const {data, error} = await supabase.from("lessons")
+    .select("*, challenges(*, challenge_options(*, challenge_progress(*)))")
+    .order("order", {ascending: true})
+    .eq("challenge_progress", userId)
+    
+    if(!data || error) {
+        return null
+    }
+    
+    const normalizedChallenges = data.map((challenge: Challenge) => {
+        const completed = challenge.challenge_progress 
+            && challenge.challenge_progress.length > 0
+            && challenge.challenge_progress.every((progress) => progress.completed);
+
+        return {...challenge, completed};
+    });
+    
+    return {...data, challenges: normalizedChallenges}
+});
+
+export const getLessonPercentage = cache(async () => {
+    const courseProgress = await getCourseProgress();
+    
+    if(!courseProgress.activeLessonId) {
+        return 0;
+    }
+    
+    const lesson = await getLesson(courseProgress.activeLessonId);
+    
+    if (!lesson) {
+        return 0;
+    }
+    
+    const completedChallenges = lesson.challenges.filter((challange) => challange.completed);
+    const persentage = Math.round(
+        (completedChallenges.length / lesson.challenges.length) * 100,
+    );
+    
+    return persentage;
 })

@@ -11,7 +11,7 @@ type Lesson = {
 type Props = {    
     title: string;
     description: string;
-    activeLesson: Lesson | null;
+    activeLesson: Lesson | undefined;
     activeLessonPersentage: number;
     lessons : Lesson[];
 };

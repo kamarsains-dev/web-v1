@@ -4,7 +4,7 @@
 import Link from "next/link";
 // import { Button } from "@/components/ui/button"; 
 import Image from "next/image";
-import Current from "@/public/current.svg"
+import Current from "@/public/select.svg"
 import Locked from "@/public/locked.svg"
 import { useParams } from "next/navigation";
 
@@ -58,6 +58,7 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
                                 alt=""
                                 width={300}
                                 height={300}
+                                quality={100}
                             />
                             <h1 className="mt-2 text-sm font-medium">{title}</h1>
                         </div>
@@ -67,10 +68,11 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
                         <div className="w-[128px] h-[128px] relative flex justify-center items-center">
                             <div>
                                 <Image 
-                                    src={Locked}
+                                    src={locked ? Locked : Current}
                                     alt=""
                                     width={300}
                                     height={300}
+                                    quality={100}
                                 />
                                 <h1 className="mt-2 text-sm font-medium">{title}</h1>
                             </div>
