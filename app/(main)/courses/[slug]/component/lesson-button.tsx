@@ -45,7 +45,7 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
     const isCompleted = !current && !locked
 
 
-    const href = isCompleted ? `${slug}/${title.toLowerCase().replace(/\s+/g, "-")}` : `${slug}`;
+    const href = isCompleted ? `${slug}` : `${slug}/${title.toLowerCase().replace(/\s+/g, "-")}`;
 
     return (
         <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>

@@ -147,11 +147,12 @@ export const getCourseProgress = cache (async() => {
     const firstUncompletedLesson = data?.flatMap((unit: Unit) => unit.lessons)
     .find ((lesson)=> {
         return lesson.challenges.some((challenge) => {
-            const userProgressData = challenge.challenge_progress?.filter((progress) => progress.user_id === userId) ?? [] 
+            const userProgressData = challenge.challenge_progress?.filter((progress) => progress.user_id === userId)
 
             return (
-              userProgressData.length === 0 ||
-              userProgressData.some((progress) => progress.completed === false)
+                !userProgressData ||
+                userProgressData.length === 0 ||
+                userProgressData.some((progress) => progress.completed === false)
             );
         });
     });

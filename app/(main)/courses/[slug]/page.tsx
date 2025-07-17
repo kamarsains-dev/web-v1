@@ -4,7 +4,7 @@ import { StickyWrapper } from "@/components/sticky-wrapper";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import InfoCard from "./component/info-card";
 import { Unit } from "./component/unit";
-import Reminder from "../../component/reminder";
+//import Reminder from "../../component/reminder";
 
 const Learn = async () => {
     const userProgressData = getUserProgress();
@@ -23,7 +23,6 @@ const Learn = async () => {
             <StickyWrapper>
                 <div className="w-sm">
                     <InfoCard/>
-                    <Reminder />   
                 </div>
                 
             </StickyWrapper>
