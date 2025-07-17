@@ -4,7 +4,7 @@ import { StickyWrapper } from "@/components/sticky-wrapper";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import InfoCard from "./component/info-card";
 import { Unit } from "./component/unit";
-
+import Reminder from "../../component/reminder";
 
 const Learn = async () => {
     const userProgressData = getUserProgress();
@@ -21,7 +21,11 @@ const Learn = async () => {
     return(
         <div className=" max-w-[1300px] container flex flex-row-reverse justify-center mt-20 pb-20">
             <StickyWrapper>
-                <InfoCard/>
+                <div className="w-sm">
+                    <InfoCard/>
+                    <Reminder />   
+                </div>
+                
             </StickyWrapper>
             <FeedWrapper>
                 <div className="flex flex-col justify-center items-center w-full">

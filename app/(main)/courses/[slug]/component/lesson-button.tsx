@@ -49,7 +49,7 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
 
     return (
         <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>
-            <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted ? 40 : 60}}>
+            <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted ? 40 : 0}}>
                 {current ? (
                     <div className="w-[128px] h-[128px] relative flex justify-center items-center">
                         <div>

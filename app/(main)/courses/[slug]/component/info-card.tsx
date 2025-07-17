@@ -18,7 +18,7 @@ const InfoCard = async () => {
     }
 
     return(
-        <div className="w-[368px]">
+        <div>
             <Card>
                 <CardHeader>
                     <Image 
