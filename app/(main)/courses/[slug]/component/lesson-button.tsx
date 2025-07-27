@@ -4,7 +4,8 @@
 import Link from "next/link";
 // import { Button } from "@/components/ui/button"; 
 import Image from "next/image";
-import Current from "@/public/select.svg"
+import Select from "@/public/select.svg"
+import Current from "@/public/current.svg"
 import Locked from "@/public/locked.svg"
 import { useParams } from "next/navigation";
 
@@ -44,31 +45,23 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
    // const isLast = index === totalCount;
     const isCompleted = !current && !locked
 
+    const getIcon = () => {
+        if(locked) return Locked;
+        if(current) return Select;
+        if(isCompleted) return Current;
+    }
 
-    const href = isCompleted ? `${slug}` : `${slug}/${title.toLowerCase().replace(/\s+/g, "-")}`;
+
+    const href = isCompleted ? `${slug}` : `/lesson/` //`${slug}/${title.toLowerCase().replace(/\s+/g, "-")}`;
 
     return (
         <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>
-            <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted ? 40 : 0}}>
-                {current ? (
-                    <div className="w-[128px] h-[128px] relative flex justify-center items-center">
-                        <div>
-                            <Image 
-                                src={ locked ? Locked : Current}
-                                alt=""
-                                width={300}
-                                height={300}
-                                quality={100}
-                            />
-                            <h1 className="mt-2 text-sm font-medium">{title}</h1>
-                        </div>
-                    </div>
-                ) : (
+            <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted || isCompleted ? 40 : 0}}>
                     <div>
                         <div className="w-[128px] h-[128px] relative flex justify-center items-center">
                             <div>
                                 <Image 
-                                    src={locked ? Locked : Current}
+                                    src={getIcon()}
                                     alt=""
                                     width={300}
                                     height={300}
@@ -78,7 +71,6 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
                             </div>
                         </div>
                     </div>
-                ) }
             </div>
         </Link>
     )

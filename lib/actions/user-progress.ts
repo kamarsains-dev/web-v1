@@ -48,8 +48,62 @@ export const upsertUserProgress = async (courseId:number) => {
     
     revalidatePath("/courses");
     revalidatePath(`/courses/${course.slug}`);
-    redirect(`/courses/${course.slug}`)
-    
+    redirect(`/courses/${course.slug}`);
+}
+
+export const reduceThunders = async (challengeId: number) => {
+    const supabase = await createClient();
+    const { data: {user}, error } = await supabase.auth.getUser();
+
+    if (!user || error) {
+        console.log("Unauthorized", error)
+    }
+
+    const currentUserProgress = await getUserProgress();
+
+    const {data: challenge} = await supabase.from("challenges").select("id, lesson_id")
+    .eq("id", challengeId)
+    .maybeSingle();
+
+    if(!challenge) {
+        throw new Error("Challenge not found")
+    }
+
+    const lessonId = challenge.lesson_id
+
     
 
+    const { data: existingChallengeProgress} = await supabase.from("challenge_progress").select("*")
+    .eq("user_id", user?.id)
+    .eq("challenge_id", challengeId)
+
+    const isPractice = !!existingChallengeProgress;
+
+    if(isPractice) {
+        return { error: "Practice"};
+    }
+
+    if(!currentUserProgress) {
+        throw new Error("User Progress Not found");
+    }
+
+
+    if(currentUserProgress.thunders === 0) {
+        return { error: "thunders"}
+    }
+
+    const {data: userProgressUpdate } = await supabase.from("user_progress").update({
+        thunders: Math.max(currentUserProgress.thunders - 1, 0)})
+        .eq("user_id", user?.id);
+
+    if(!userProgressUpdate) {
+        console.log("Failed to update user progress", userProgressUpdate)
+        throw new Error("Failed to update user progress")
+    }
+
+    revalidatePath("shop");
+    revalidatePath("/learn")
+    revalidatePath("/courses");
+    revalidatePath("leaderboard");
+    revalidatePath(`/courses/${lessonId}`)
 }

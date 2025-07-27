@@ -48,19 +48,30 @@ export const getCourseById = cache(async (courseId: number) => {
     return data;
 });
 
-type ChallengeProgress = {
+export type ChallengeOptions = {
+    id: number;
+    challenge_id: number;
+    text: string;
+    correct: boolean;
+    image_src: string | null;
+}
+
+export type ChallengeProgress = {
   completed: boolean;
   user_id: string;
 };
 
-type Challenge = {
+export type Challenge = {
   id: number;
   lesson_id: number;
   question: string;
+  type: "SELECT" | "ASSIST";
+  order: number;
   challenge_progress: ChallengeProgress[];
+  challenge_options: ChallengeOptions[];
 };
 
-type Lesson = {
+export type Lesson = {
   id: number;
   unit_id: number;
   title: string;
@@ -177,19 +188,23 @@ export const getLesson = cache(async (id?:number) => {
     const lessonId = id || courseProgress?.activeLessonId
     
     if (!lessonId) {
+        console.log("No lesson data", lessonId)
         return null;
     }
+   
 
     const {data, error} = await supabase.from("lessons")
-    .select("*, challenges(*, challenge_options(*, challenge_progress(*)))")
-    .order("order", {ascending: true})
-    .eq("challenge_progress", userId)
-    
+    .select("id, title, unit_id, challenges(*, challenge_options(*), challenge_progress(*))")
+    .eq("id", lessonId)
+    .order("order", {foreignTable: "challenges" ,ascending: true})
+    .maybeSingle();
+
     if(!data || error) {
+        console.log("No data from get lesson", error)
         return null
     }
-    
-    const normalizedChallenges = data.map((challenge: Challenge) => {
+  
+    const normalizedChallenges = data.challenges.map((challenge: Challenge) => {
         const completed = challenge.challenge_progress 
             && challenge.challenge_progress.length > 0
             && challenge.challenge_progress.every((progress) => progress.completed);
@@ -213,7 +228,7 @@ export const getLessonPercentage = cache(async () => {
         return 0;
     }
     
-    const completedChallenges = lesson.challenges.filter((challange) => challange.completed);
+    const completedChallenges = lesson.challenges.filter((challenge: Challenge) => challenge);
     const persentage = Math.round(
         (completedChallenges.length / lesson.challenges.length) * 100,
     );

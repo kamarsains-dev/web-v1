@@ -1,12 +1,6 @@
 import { LessonButton } from "./lesson-button";
 import UnitBanner from "./unit-banner";
-
-
-type Lesson = {
-    id: number;
-    completed: boolean;
-    title: string;
-}
+import { Lesson } from "@/lib/queries";
 
 type Props = {    
     title: string;
