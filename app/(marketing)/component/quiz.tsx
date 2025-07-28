@@ -9,8 +9,8 @@ import { Footer } from "./footer";
 import { upsertChallengeProgress } from "@/lib/actions/challenge-progress";
 import { toast } from "sonner";
 import { reduceThunders } from "@/lib/actions/user-progress";
-import { Button } from "@/components/ui/button";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import ResultCard from "./resultcard";
 
 
 
@@ -39,8 +39,11 @@ const inter = DM_Sans({
 
 
 
-export const Quiz = ({initialPercentage, initialThunders, initialLessonChallenges, userSubscription}: Props) => {
+export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  initialLessonChallenges, userSubscription}: Props) => {
     const [pending, startTransition] = useTransition();
+
+    const router = useRouter();
+    const [lessonId] = useState(initialLessonId)
     const [thunders, setThunders] = useState(initialThunders)
     const [percentage, setPercentage] = useState(initialPercentage)
     const [challenges] = useState(initialLessonChallenges);
@@ -61,18 +64,39 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonChallenge
     };
 
     const handleClick = () => {
-        redirect("/home")
+        router.push("/courses")
     }
 
-    if(!challenge) {
+    if(true || !challenge) {
         return (
             <>
-                <div className="w-screen h-screen flex justify-center items-center">
-                    <Button onClick={handleClick}>
-                        Kembali
-                    </Button>
+                <div className="w-full h-screen flex justify-center items-center">
+                    <div className="flex flex-col justify-center items-center gap-y-14 lg:gap-y-20">
+                        <div className="font-black text-3xl lg:text-4xl">
+                            <h1>GG Elu Bro!</h1>
+                        </div>
+                        <div className="flex gap-x-16 lg:gap-x-24">
+                            <ResultCard 
+                                variant="points"
+                                value={challenges.length * 10}
+                            />
+                            <ResultCard 
+                                variant="thunders"
+                                value={thunders}
+                            />      
+                        </div>
+                          
+                    </div>
                 </div>
-            
+                <div className="fixed bottom-0 left-0 right-0 z-10 bg-white border-t">
+                    <Footer
+                        lessonId={lessonId}
+                        status="completed"
+                        onCheck={handleClick}
+                        
+                    />    
+                </div>
+                
             </>
         )
     }
@@ -180,12 +204,15 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonChallenge
                     </div>
                 </div>
             </div>
-            <Footer
-                disabled={pending || !selectedOption}
-                status={status}
-                onCheck={onContinue}
+            <div className="fixed bottom-0 left-0 right-0 z-10 bg-white border-t">
+                <Footer
+                    disabled={pending || !selectedOption}
+                    status={status}
+                    onCheck={onContinue}
+                
+                />     
+            </div>
             
-            />
         </div>
     )
 }

@@ -5,16 +5,16 @@ type Props = {
     onCheck: () => void;
     status: "correct" | "wrong" | "none" | "completed"
     disabled?: boolean;
-    lessonId?: boolean;
+    lessonId?: number;
 };
 
 export const Footer = ({onCheck, status}:Props) => {
     return (
-        <footer className={cn("h-[100px] border-t-2 w-full flex",
-            status === "correct" && "border-t-2 bg-green-100",
-            status === "wrong" && "border-2 bg-amber-100"
+        <footer className={cn("py-4 border-t w-full flex",
+            status === "correct" && "border-t bg-green-100",
+            status === "wrong" && "border-t bg-amber-100"
         )}>
-            <div className="h-full w-full max-w-[540px] mx-auto flex items-center justify-around px-6 lg:px-10">
+            <div className="h-full w-full max-w-3xl mx-auto flex items-center justify-around container gap-x-11">
                 {status === "correct" && (
                     <div className="text-black font-bold text-xl flex items-center">
                         🎉 Benar!
@@ -25,15 +25,11 @@ export const Footer = ({onCheck, status}:Props) => {
                         💔 Salah
                     </div>
                 )}
-                {status === "completed" && (
-                    <Button variant="outline" onClick={() => window.location.href = `/courses/`}>
-                        Coba lagi?
-                    </Button>
-                )}
-                <Button variant={(status === "correct" ? "secondary" : "primary")} onClick={onCheck}>
+                <Button variant={(status === "correct" ? "secondary" : "primary")} onClick={onCheck} className="w-full max-w-[350px] rounded-xl font-bold text-lg h-14">
                     {status === "none" && "Check"}
                     {status === "correct" && "Next"}
                     {status === "wrong" && "Retry"}
+                    {status === "completed" && "Continue"}
                 </Button>
             </div>
         </footer>

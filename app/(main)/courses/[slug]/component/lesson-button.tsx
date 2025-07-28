@@ -4,7 +4,8 @@
 import Link from "next/link";
 // import { Button } from "@/components/ui/button"; 
 import Image from "next/image";
-import Select from "@/public/select.svg"
+// import Select from "@/public/select.svg"
+import RiveLessonBtn from "./rive-lesson";
 import Current from "@/public/current.svg"
 import Locked from "@/public/locked.svg"
 import { useParams } from "next/navigation";
@@ -46,9 +47,36 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
     const isCompleted = !current && !locked
 
     const getIcon = () => {
-        if(locked) return Locked;
-        if(current) return Select;
-        if(isCompleted) return Current;
+        if(locked) {
+            return (
+                <Image 
+                    src={Locked}
+                    alt=""
+                    width={300}
+                    height={300}
+                    quality={100}
+                />    
+            )
+            
+        };
+        if(current) {
+            return (
+                <div className="flex justify-center items-center w-[200px] h-[200px]">
+                    <RiveLessonBtn/>        
+                </div>
+           
+        )};
+        if(isCompleted) {
+            return (
+                <Image 
+                    src={Current}
+                    alt=""
+                    width={300}
+                    height={300}
+                    quality={100}
+            />
+            )
+        };
     }
 
 
@@ -59,14 +87,8 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
             <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted || isCompleted ? 40 : 0}}>
                     <div>
                         <div className="w-[128px] h-[128px] relative flex justify-center items-center">
-                            <div>
-                                <Image 
-                                    src={getIcon()}
-                                    alt=""
-                                    width={300}
-                                    height={300}
-                                    quality={100}
-                                />
+                            <div className="flex flex-col justify-center items-center">
+                                {getIcon()}
                                 <h1 className="mt-2 text-sm font-medium">{title}</h1>
                             </div>
                         </div>
