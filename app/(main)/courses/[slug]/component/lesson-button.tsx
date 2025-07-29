@@ -50,7 +50,7 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
     const getIcon = () => {
         if(locked) {
             return (
-                <div className="flex justify-center items-center w-[200px] h-[200px]">
+                <div className="flex justify-center items-center w-[160px] h-[200px]">
                     <LockBtn/>        
                 </div>
             )
@@ -58,14 +58,14 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
         };
         if(current) {
             return (
-                <div className="flex justify-center items-center w-[200px] h-[200px]">
+                <div className="flex justify-center items-center w-[160px] h-[200px]">
                     <ActiveBtn/>        
                 </div>
            
         )};
         if(isCompleted) {
             return (
-                <div className="flex justify-center items-center w-[200px] h-[200px]">
+                <div className="flex justify-center items-center w-[160px] h-[200px]">
                     <CurrentBtn/>        
                 </div>
             )
