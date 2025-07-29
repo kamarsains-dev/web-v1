@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Nav from "@/components/ui/nav";
 import Key from "@/public/key.svg";
+import Thunder from "@/public/thunder-icon.svg"
 import UserAvatar from "@/components/user-avatar";
 import { getUserProgress } from "@/lib/queries";
 
@@ -36,9 +37,18 @@ const UserHeader = async () => {
                 <div className="flex justify-center items-center gap-x-2">
                     <Button variant="button" className="rounded-full text-xl gap-2 font-bold">
                         <Image
+                            src={Thunder}
+                            width={21}
+                            height={21}
+                            alt="key"
+                        />
+                        <p>{userProgressData?.thunders ?? 0}</p>
+                    </Button>
+                     <Button variant="button" className="rounded-full text-xl gap-2 font-bold">
+                        <Image
                             src={Key}
-                            width={14}
-                            height={14}
+                            width={21}
+                            height={21}
                             alt="key"
                         />
                         <p>{userProgressData?.keys ?? 0}</p>

@@ -19,8 +19,8 @@ type Props = {
 const List = ({ courses, activeCourseId }: Props) => {
     
     return (
-        <div className="mt-4 lg:mt-0">
-            <div className=" grid lg:flex gap-4 justify-center items-center w-full h-full">
+        <div className=" w-5xl">
+            <div className=" flex flex-col gap-4 max-w-[1200px] w-full h-full">
                 {courses.map((course) => {
                     const isActive = course.id === activeCourseId
                     return (
