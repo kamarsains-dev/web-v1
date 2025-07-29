@@ -2,7 +2,7 @@ import CurrentButton from "@/components/animations/current-btn"
 
 const CurrentBtn = () => {
     return (
-        <div className="flex justify-center items-center w-[200px] h-[200px]">
+        <div className="flex justify-center items-center w-[160px] h-[200px]">
             <CurrentButton />
         </div>
     )

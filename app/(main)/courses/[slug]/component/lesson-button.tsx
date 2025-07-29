@@ -40,8 +40,8 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
         indentationLevel = cycleIndex - cycleLength;
     }
 
-    const baseOffset = -120;
-    const rightPosition = baseOffset + indentationLevel * 120;
+    const baseOffset = -110;
+    const rightPosition = baseOffset + indentationLevel * 110;
 
     const isFirst = index === 0;
    // const isLast = index === totalCount;
@@ -77,7 +77,7 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
 
     return (
         <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>
-            <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted || isCompleted ? 40 : 0}}>
+            <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted || isCompleted ? 20 : 0}}>
                     <div>
                         <div className="w-[128px] h-[128px] relative flex justify-center items-center">
                             <div className="flex flex-col justify-center items-center ">
