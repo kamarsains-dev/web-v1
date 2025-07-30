@@ -1,17 +1,31 @@
-import { Button } from "@/components/ui/button";
+import { getUserProgress, getCourseById } from "@/lib/queries";
+import Image from "next/image";
 
 type Props = {
     title: string;
     description: string;
 }
 
-const unitBanner = ({ title, description }: Props) => {
+const unitBanner = async ({ title, description }: Props) => {
+    const userProgressData = await getUserProgress();
+    const courseData = await getCourseById(userProgressData?.active_courses_id);
+
+
     return (
-        <div className="w-full flex justify-center items-center">
-            <Button variant='quinaryBorder' className="flex flex-col p-10 w-full rounded-3xl h-16 border-b-6 gap-y-0">
-                <h1 className="text-sm font-bold">{title}</h1>
-                <h3 className="text-[15px]">{description}</h3>    
-            </Button>
+        <div className="w-screen flex justify-center items-center">
+            <div className="flex p-10 justify-center text-left items-center w-full h-16 border-gray-200 border-b-2 gap-x-5">
+                <Image 
+                    src={courseData.icon}
+                    width={40}
+                    height={40}
+                    alt="level-up"
+                    className="mb-3"
+                />
+                <div>
+                    <h1 className="text-md font-bold">{title}</h1>
+                    <h3 className="text-[15px]">{description}</h3> 
+                </div>
+            </div>
         </div>
     )
 }

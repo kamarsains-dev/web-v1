@@ -4,11 +4,10 @@
 // import { Button } from "@/components/ui/button"; 
 // import Image from "next/image";
 // import Select from "@/public/select.svg"
-// import Current from "@/public/current.svg"
-// import Locked from "@/public/locked.svg"
+import Image from "next/image";
+import CurrentBtn from "@/public/current-btn.svg"
+import LockedBtn from "@/public/lock-btn.svg"
 import { useParams } from "next/navigation";
-import CurrentBtn from "./current-btn";
-import LockBtn from "./lock-btn";
 import ActiveBtn from "./rive-lesson";
 import Link from "next/link";
 
@@ -50,24 +49,34 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
     const getIcon = () => {
         if(locked) {
             return (
-                <div className="flex justify-center items-center w-[160px] h-[200px]">
-                    <LockBtn/>        
-                </div>
+
+                    <Image 
+                        src={LockedBtn}
+                        alt=""
+                        width={300}
+                        height={300}
+                        quality={100}
+                    />        
+       
             )
             
         };
         if(current) {
             return (
-                <div className="flex justify-center items-center w-[160px] h-[200px]">
+                <div className="flex justify-center items-center w-[130px] h-[200px]">
                     <ActiveBtn/>        
                 </div>
            
         )};
         if(isCompleted) {
             return (
-                <div className="flex justify-center items-center w-[160px] h-[200px]">
-                    <CurrentBtn/>        
-                </div>
+                    <Image 
+                        src={CurrentBtn}
+                        alt=""
+                        width={300}
+                        height={300}
+                        quality={100}
+                    />            
             )
         };
     }
@@ -79,7 +88,7 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
         <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>
             <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted || isCompleted ? 20 : 0}}>
                     <div>
-                        <div className="w-[128px] h-[128px] relative flex justify-center items-center">
+                        <div className="w-[118px] h-[118px] relative flex justify-center items-center">
                             <div className="flex flex-col justify-center items-center ">
                                 {getIcon()}
                                 <h1 className="-mt-2 text-sm font-medium">{title}</h1>

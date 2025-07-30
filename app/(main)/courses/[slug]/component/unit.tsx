@@ -13,7 +13,7 @@ type Props = {
 export const Unit = ({ title, description, activeLesson, activeLessonPersentage, lessons}: Props ) => {
     return (
         <div className="flex flex-col justify-center items-center">
-            <div className="flex w-full justify-center items-center lg:hidden">
+            <div className="flex w-full justify-center items-center md:hidden">
                 <UnitBanner 
                     title={title}
                     description={description}

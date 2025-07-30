@@ -4,7 +4,7 @@ type Props = {
 
 export const StickyWrapper = ({ children }: Props) => {
   return (
-    <div className="hidden lg:block w-[368px] z-50">
+    <div className="hidden md:block w-[304px] z-50">
       <div className="fixed">
         {children}
       </div>
