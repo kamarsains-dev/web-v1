@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { reduceThunders } from "@/lib/actions/user-progress";
 import { useRouter } from "next/navigation";
 import ResultCard from "./resultcard";
+import RiveComponent from "./level-animations";
 
 
 
@@ -45,7 +46,9 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
     const router = useRouter();
     const [lessonId] = useState(initialLessonId)
     const [thunders, setThunders] = useState(initialThunders)
-    const [percentage, setPercentage] = useState(initialPercentage)
+    const [percentage, setPercentage] = useState(() => {
+        return initialPercentage === 100 ? 0 : initialPercentage;
+    })
     const [challenges] = useState(initialLessonChallenges);
     const [activeIndex, setActiveIndex] = useState(() => {
         const uncompletedIndex = challenges.findIndex((challenge) => !challenge.completed);
@@ -71,24 +74,34 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
         return (
             <>
                 <div className="w-full h-screen flex justify-center items-center">
-                    <div className="flex flex-col justify-center items-center gap-y-14 lg:gap-y-20">
-                        <div className="font-black text-3xl lg:text-4xl">
-                            <h1>GG Elu Bro!</h1>
+                    <div className="flex flex-col justify-center items-center gap-y-8 lg:gap-y-14">
+                        <div className="flex justify-center items-center w-[200px] h-[150px]">
+                            <RiveComponent />
                         </div>
-                        <div className="flex gap-x-16 lg:gap-x-24">
+                        <div>
+                            <h1 className="text-3xl font-bold">Kerja Bagus!</h1>
+                        </div>
+                        <div>
                             <ResultCard 
-                                variant="points"
-                                value={challenges.length * 10}
+                            variant={"total points"}
+                            value={challenges.length * 4 + challenges.length * 4 / 4}
+                            />    
+                        </div>
+                        <div className="flex gap-x-9 bg-gray-200 rounded-2xl px-5 py-2">
+                            <ResultCard 
+                                variant={"points"}
+                                value={challenges.length * 4}
                             />
+                            <hr className="border border-gray-300 h-14"/>
                             <ResultCard 
-                                variant="thunders"
-                                value={thunders}
+                                variant="bonus"
+                                value={challenges.length * 4 / 4}
                             />      
                         </div>
                           
                     </div>
                 </div>
-                <div className="fixed bottom-0 left-0 right-0 z-10 bg-white border-t">
+                <div className="fixed bottom-0 left-0 right-0 z-10 bg-white">
                     <Footer
                         lessonId={lessonId}
                         status="completed"
@@ -204,7 +217,7 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
                     </div>
                 </div>
             </div>
-            <div className="fixed bottom-0 left-0 right-0 z-10 bg-white border-t">
+            <div className="fixed bottom-0 left-0 right-0 z-10 bg-white border-t-2">
                 <Footer
                     disabled={pending || !selectedOption}
                     status={status}

@@ -235,3 +235,13 @@ export const getLessonPercentage = cache(async () => {
     
     return persentage;
 })
+
+export const getAllLessonsByUnitId = async (unitId: number) => {
+    const supabase = await createClient();
+
+    const {data: lessons} = await supabase.from("lessons")
+    .select("*")
+    .eq("unit_id", unitId)
+
+    return lessons;
+}

@@ -39,8 +39,8 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
         indentationLevel = cycleIndex - cycleLength;
     }
 
-    const baseOffset = -110;
-    const rightPosition = baseOffset + indentationLevel * 110;
+    const baseOffset = -105;
+    const rightPosition = baseOffset + indentationLevel * 105;
 
     const isFirst = index === 0;
    // const isLast = index === totalCount;
@@ -49,7 +49,6 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
     const getIcon = () => {
         if(locked) {
             return (
-
                     <Image 
                         src={LockedBtn}
                         alt=""
@@ -57,9 +56,7 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
                         height={300}
                         quality={100}
                     />        
-       
             )
-            
         };
         if(current) {
             return (

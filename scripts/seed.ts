@@ -19,7 +19,7 @@ const seed = async () => {
     const {error: errorTableData} = await supabase.from(table).delete().not(column, "is", null);
     if(errorTableData) {
       console.log(`Warning deleting ${tableConfigs}`, errorTableData);
-    } else {
+    } else { 
       console.log(`Done ${tableConfigs}`);
     }
   
@@ -55,7 +55,7 @@ const seed = async () => {
         id: 1,
         course_id: 1,
         title: "Unit 1",
-        description: "Belajar penalaran matematika",
+        description: "Penalaran Matematika",
         order: 1,
       },
     ]);
