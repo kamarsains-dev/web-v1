@@ -10,10 +10,10 @@ const ResultCard = ({variant, value}:Props) => {
         return (
             <div className="flex flex-col justify-center items-center">
                 <div>
-                    <p className="capitalize text-gray-500 text-sm">{variant}</p>  
+                    <p className="capitalize text-sm">{variant}</p>  
                 </div>
                 <div>
-                    <p className="text-[41px] font-black">
+                    <p className="text-[41px] font-black text-[#63CE77]">
                         <CountUp 
                         end={value}
                         duration={3}

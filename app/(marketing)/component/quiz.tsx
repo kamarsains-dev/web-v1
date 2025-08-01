@@ -13,6 +13,10 @@ import { useRouter } from "next/navigation";
 import ResultCard from "./resultcard";
 import RiveComponent from "./level-animations";
 
+const soraFont = DM_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 
 type LessonChallenges = {
@@ -73,7 +77,7 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
     if(true || !challenge) {
         return (
             <>
-                <div className="w-full h-screen flex justify-center items-center">
+                <div className={`${soraFont.className} w-full h-screen flex justify-center items-center`}>
                     <div className="flex flex-col justify-center items-center gap-y-8 lg:gap-y-14">
                         <div className="flex justify-center items-center w-[200px] h-[150px]">
                             <RiveComponent />
@@ -87,12 +91,12 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
                             value={challenges.length * 4 + challenges.length * 4 / 4}
                             />    
                         </div>
-                        <div className="flex gap-x-9 bg-gray-200 rounded-2xl px-5 py-2">
+                        <div className="flex gap-x-9 bg-gray-100 rounded-2xl px-5 py-2">
                             <ResultCard 
                                 variant={"points"}
                                 value={challenges.length * 4}
                             />
-                            <hr className="border border-gray-300 h-14"/>
+                            <hr className="border border-gray-200 h-14"/>
                             <ResultCard 
                                 variant="bonus"
                                 value={challenges.length * 4 / 4}

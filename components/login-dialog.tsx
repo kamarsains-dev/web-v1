@@ -1,5 +1,5 @@
 "use client"
-import { login } from "@/app/(auth)/actions";
+import { login, signInWithGoogle } from "@/app/(auth)/actions";
 
 import {
     Dialog,
@@ -67,7 +67,7 @@ const LoginDialog = () => {
               </form>
             ) : (
                 <div>
-                        <Button variant="outline" className="w-full h-13 rounded-xl mt-3">
+                        <Button variant="outline" onClick={signInWithGoogle} className="w-full h-13 rounded-xl mt-3">
                             <div className="flex justify-center items-center gap-x-2 my-1">
                                 <Image
                                     src={Google}

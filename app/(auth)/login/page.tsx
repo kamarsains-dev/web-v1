@@ -1,4 +1,4 @@
-import { login } from '../actions'
+import { login, signInWithGoogle } from '../actions'
 import { Button } from '@/components/ui/button'
 import GoogleLogo from '@/public/google.svg';
 import Image from "next/image";
@@ -10,7 +10,7 @@ export default async function LoginPage() {
           Log In
         </div>
         <div className="flex flex-col w-full items-center">
-          <Button variant="default" className="w-full h-13 rounded-xl mt-3">
+          <Button variant="default" onClick={signInWithGoogle} className="w-full h-13 rounded-xl mt-3">
               <div className="flex justify-center items-center gap-x-2 my-1">
                   <Image
                       src={GoogleLogo}

@@ -25,7 +25,7 @@ export const Footer = ({onCheck, status}:Props) => {
                         💔 Salah
                     </div>
                 )}
-                <Button variant={(status === "correct" ? "secondary" : "primary")} onClick={onCheck} className="w-full max-w-[350px] rounded-xl font-bold text-lg h-14">
+                <Button variant={(status === "correct" ? "secondary" : "quinary")} onClick={onCheck} className="w-full max-w-[350px] rounded-xl font-bold text-lg h-14">
                     {status === "none" && "Check"}
                     {status === "correct" && "Next"}
                     {status === "wrong" && "Retry"}
