@@ -74,7 +74,10 @@ export async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: "https://kamarsains.vercel.app/auth/callback",
+      redirectTo:
+        process.env.NODE_ENV === "production"
+          ? "https://kamarsains.vercel.app/auth/callback"
+          : "http://localhost:3000/auth/callback",
     },
   });
 

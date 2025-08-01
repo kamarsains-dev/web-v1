@@ -35,7 +35,7 @@ const UserHeader = async () => {
                     <Nav/>   
                 </div>    
                 <div className="flex justify-center items-center gap-x-2">
-                    <Button variant="button" className="rounded-full text-xl gap-2 font-bold">
+                    <Button variant="button" className="rounded-full text-xl font-bold">
                         <Image
                             src={Thunder}
                             width={21}
@@ -44,7 +44,7 @@ const UserHeader = async () => {
                         />
                         <p>{userProgressData?.thunders ?? 0}</p>
                     </Button>
-                     <Button variant="button" className="rounded-full text-xl gap-2 font-bold">
+                     <Button variant="button" className="rounded-full text-xl font-bold">
                         <Image
                             src={Key}
                             width={21}

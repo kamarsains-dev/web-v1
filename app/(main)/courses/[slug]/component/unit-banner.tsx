@@ -21,7 +21,7 @@ const unitBanner = async ({ title, description }: Props) => {
     return (
         <div className="w-screen flex justify-center items-center">
             <div className="flex px-3 justify-center text-left items-center w-full border-gray-200 border-b-2 gap-x-5">  
-                <div className="w-full my-4 mx-5 flex flex-col gap-y-1">
+                <div className="w-full my-4 mx-5 flex flex-col gap-y-2">
                     <div className="flex gap-x-3 w-full items-center">
                         <div className="bg-[#375CE3] max-w-14 w-full h-full flex justify-center items-center rounded-md">
                             <h1 className="text-[12px] text-white font-bold uppercase p-0.5">{title}</h1>

@@ -16,7 +16,6 @@ export const Header = () => {
                         className="lg:hidden"
                         />
                     </Link>
-                    
                     <h1 className="text-2xl font-bold text-gray-900 tracking-wide hidden lg:block">
                         <Link href='/'>
                             Kamar Sains

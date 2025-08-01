@@ -29,7 +29,7 @@ export default async function UserAvatar() {
         <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer">
                 <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full border-2  flex items-center justify-center text-lg font-bold text-gray-500">
+                    <div className="w-11 h-11 rounded-full border-2  flex items-center justify-center text-lg font-bold text-gray-500">
                         {getInitial(data?.user?.email)}
                     </div>
                 </div>   

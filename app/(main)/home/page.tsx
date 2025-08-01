@@ -5,9 +5,9 @@ import Leaderboard from "../component/leaderboard";
 import Info from "../component/info";
 import UserProgress from "../component/user-progress";
 
-export default async function Home () {
+export default function Home () {
     return (
-        <div>   
+        <div> 
             <div className="container md:grid justify-center pb-20 max-w-[1200px]">
                 <div className="md:flex justify-center gap-x-10 mt-18 md:mt-32">
                     <div className="md:hidden">

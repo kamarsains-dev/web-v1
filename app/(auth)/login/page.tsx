@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import GoogleLogo from '@/public/google.svg';
 import Image from "next/image";
 
-export default async function LoginPage() { 
+export default function LoginPage() { 
   return (
     <div className='container max-w-2xl min-h-screen flex flex-col justify-center items-center'>
         <div className="flex justify-center items-center text-3xl font-bold py-5">
