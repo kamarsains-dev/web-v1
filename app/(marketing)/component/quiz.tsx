@@ -174,27 +174,9 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
                     .catch(() => toast.error("coba lagi kalau error"))
             })
             
+        } else {
+            setStatus('wrong')
         } 
-        /*
-        else {
-            startTransition(() => {
-                reduceThunders(challenge.challenge.id)
-                    .then((response) => {
-                        if(response?.error === "thunders") {
-                            console.error("Missing Thunders")
-                            return;
-                        }
-
-                        setStatus("wrong");
-
-                        if(!response?.error) {
-                            setThunders((prev) => Math.max(prev - 1, 0))
-                        }
-                    })
-                    .catch(() => toast.error("Coba lagi kalau error"))
-            })
-        } 
-        */
     }
 
     const title = challenge?.type === "ASSIST"

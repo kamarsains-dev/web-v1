@@ -1,6 +1,6 @@
 import { LessonButton } from "./lesson-button";
 import UnitBanner from "./unit-banner";
-import { Lesson } from "@/lib/queries";
+import { Lesson, getUserProgress } from "@/lib/queries";
 
 type Props = {    
     title: string;
@@ -10,7 +10,11 @@ type Props = {
     lessons : Lesson[];
 };
 
-export const Unit = ({ title, description, activeLesson, activeLessonPersentage, lessons}: Props ) => {
+export const Unit = async ({ title, description, activeLesson, activeLessonPersentage, lessons}: Props ) => {
+    const userProgressData = await getUserProgress();
+
+    const userThunders = userProgressData.thunders
+    
     return (
         <div className="flex flex-col justify-center items-center">
             <div className="flex w-full justify-center items-center md:hidden">
@@ -35,6 +39,7 @@ export const Unit = ({ title, description, activeLesson, activeLessonPersentage,
                             current={isCurrent}
                             locked={isLocked}
                             percentage={activeLessonPersentage}
+                            userThunders={userThunders}
 
                         />
                     )

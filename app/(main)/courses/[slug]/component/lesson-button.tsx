@@ -10,6 +10,7 @@ import LockedBtn from "@/public/lock-btn.svg"
 import { useParams } from "next/navigation";
 import ActiveBtn from "./rive-lesson";
 import Link from "next/link";
+import { toast } from "sonner";
 
 type Props = {
     id: number;
@@ -19,9 +20,10 @@ type Props = {
     current?: boolean;
     percentage: number;
     title: string;
+    userThunders: number;
 };
 
-export const LessonButton = ({index, locked, current, title}: Props) => { //add percentage, totalCounts
+export const LessonButton = ({id, index, locked, current, title, userThunders}: Props) => { //add percentage, totalCounts
     const {slug} = useParams();
 
     const cycleLength = 5;
@@ -45,6 +47,15 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
     const isFirst = index === 0;
    // const isLast = index === totalCount;
     const isCompleted = !current && !locked
+
+    const isDisabled = userThunders >= 3;
+
+    const handleClick = (res: React.MouseEvent) => {
+        if(isDisabled) {
+            res.preventDefault();
+            toast.error("Thundersmu sudah max, tunggu 24 jam untuk gas ambis lagi!")
+        }
+    }
 
     const getIcon = () => {
         if(locked) {
@@ -78,10 +89,10 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
         };
     }
 
-    const href = isCompleted ? `${slug}` : `/lesson/` //`${slug}/${title.toLowerCase().replace(/\s+/g, "-")}`;
+    const href = isCompleted ? `/lesson/practice/${id}` : `${slug}` //`${slug}/${title.toLowerCase().replace(/\s+/g, "-")}`;
 
     return (
-        <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>
+        <Link onClick={handleClick} href={isDisabled ? "#" : href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>
             <div className="relative" style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted || isCompleted ? 20 : 0}}>
                     <div>
                         <div className="w-[118px] h-[118px] relative flex justify-center items-center">

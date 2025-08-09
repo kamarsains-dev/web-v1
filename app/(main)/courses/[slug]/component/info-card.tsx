@@ -31,8 +31,8 @@ const InfoCard = async () => {
                     <CardHeader>
                         <Image 
                             src={courseData.icon}
-                            width={80}
-                            height={80}
+                            width={100}
+                            height={100}
                             alt="level-up"
                             className="mb-3"
                         />
@@ -63,8 +63,8 @@ const InfoCard = async () => {
                 <CardHeader>
                     <Image 
                         src={courseData.icon}
-                        width={80}
-                        height={80}
+                        width={100}
+                        height={100}
                         alt="level-up"
                         className="mb-3"
                     />
