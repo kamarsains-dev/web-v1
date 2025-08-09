@@ -89,7 +89,7 @@ export const LessonButton = ({id, index, locked, current, title, userThunders}: 
         };
     }
 
-    const href = isCompleted ? `/lesson/practice/${id}` : `${slug}` //`${slug}/${title.toLowerCase().replace(/\s+/g, "-")}`;
+    const href = isCompleted ? `/lesson/practice/${id}` : `/lesson` //`${slug}/${title.toLowerCase().replace(/\s+/g, "-")}`;
 
     return (
         <Link onClick={handleClick} href={isDisabled ? "#" : href} aria-disabled={locked} style={{ pointerEvents: locked ? "none" : "auto"}}>
