@@ -66,7 +66,8 @@ export const upsertThunders = async (courseId: number) => {
     const upThunders = Math.min(currentUserProgress.thunders + 1, 3);
 
     await supabase.from('user_progress').update({
-        thunders: upThunders
+        thunders: upThunders,
+        last_thunder_at: new Date(),
     })
     .eq("user_id", user?.id)
 
@@ -75,6 +76,19 @@ export const upsertThunders = async (courseId: number) => {
     revalidatePath("learn");
     revalidatePath(`/courses/${course.slug}`);
     redirect(`/courses/${course.slug}`); // ganti kalau sudah aman semua ke slugnya 
+}
+
+export const resetThunders = async (userId: string) => {
+    const supabase = await createClient();
+    const {data, error} = await supabase.from("user_progress").update({
+        thunders: 0,
+        last_thunder_at: new Date().toISOString()
+    })
+    .eq("user_id", userId)
+
+    if(!data && error) {
+        console.log("Gagal mereset", error)
+    }
 }
 
 export const reduceThunders = async (challengeId: number) => {

@@ -10,7 +10,7 @@ export default async function Layout({ children }: Readonly<{ children: React.Re
     }
 
     return (
-        <main className="">
+        <main>
             <InfoBar/>
             <Header/>
             {children}

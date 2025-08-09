@@ -20,6 +20,26 @@ export const getUserProgress = cache(async () => {
         return null;
     }
 
+    if(data?.last_thunder_at) {
+        const now = Date.now();
+        const last = new Date(data.last_thunder_at).getTime();
+        const oneDay = 24 * 60 * 60 * 1000;
+
+        if(now - last > oneDay) {
+            const {error: updateError} = await supabase.from("user_progress").update({
+                thunders: 0,
+                last_thunder_at: new Date().toISOString()
+            })
+            .eq("user_id", userId)
+
+            if(updateError){
+                console.log('Gagal mereset thunder', error);
+                return data;
+            }
+            data.thunder = 0;
+        }
+    }
+
     return data;
     
 })
