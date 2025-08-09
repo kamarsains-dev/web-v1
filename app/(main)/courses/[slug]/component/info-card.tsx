@@ -23,6 +23,34 @@ const InfoCard = async () => {
     const unitId = courseProgressData.activeLesson?.unit_id;
 
     const currentUnit = unitsData.find((unit) => unit.id === unitId)
+
+    if(!currentUnit) {
+        return (
+            <div>
+                <Card>
+                    <CardHeader>
+                        <Image 
+                            src={courseData.icon}
+                            width={80}
+                            height={80}
+                            alt="level-up"
+                            className="mb-3"
+                        />
+                        <CardTitle>
+                            {courseData.title}
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex w-full items-center gap-x-2">
+                            <CircularProgress value={100} size={30} strokeWidth={7}/>
+                            <h1 className="text-md text-gray-400">Semua selesai!</h1> 
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+        )
+    }
+
     const totalLessons = currentUnit?.lessons.length ?? 0;
     const completedLessons = currentUnit?.lessons.filter((lesson) => lesson.completed).length ?? 0;
 

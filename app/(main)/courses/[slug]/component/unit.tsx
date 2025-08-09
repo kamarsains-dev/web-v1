@@ -1,6 +1,7 @@
 import { LessonButton } from "./lesson-button";
 import UnitBanner from "./unit-banner";
 import { Lesson } from "@/lib/queries";
+import { upsertChallengeProgress } from "@/lib/actions/challenge-progress";
 
 type Props = {    
     title: string;

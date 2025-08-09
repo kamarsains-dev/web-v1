@@ -78,7 +78,6 @@ export const LessonButton = ({index, locked, current, title}: Props) => { //add 
         };
     }
 
-
     const href = isCompleted ? `${slug}` : `/lesson/` //`${slug}/${title.toLowerCase().replace(/\s+/g, "-")}`;
 
     return (

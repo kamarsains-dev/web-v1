@@ -9,7 +9,7 @@ const RiveComponent = () => {
             fit: Fit.Contain,
             alignment: Alignment.Center,
           })}
-          className="w-[200px] h-[250px] absolute"
+          className="w-[200px] h-[200px] absolute"
     />
 };
 

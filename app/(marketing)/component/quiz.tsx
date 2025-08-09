@@ -8,16 +8,18 @@ import { Options } from "./options";
 import { Footer } from "./footer";
 import { upsertChallengeProgress } from "@/lib/actions/challenge-progress";
 import { toast } from "sonner";
-import { reduceThunders } from "@/lib/actions/user-progress";
+// import { reduceThunders } from "@/lib/actions/user-progress";
 import { useRouter } from "next/navigation";
 import ResultCard from "./resultcard";
 import RiveComponent from "./level-animations";
+import { upsertThunders } from "@/lib/actions/user-progress";
 
+/*
 const soraFont = DM_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+ subsets: ["latin"],
+ weight: ["300", "400", "500", "600", "700", "800"],
 });
-
+*/
 
 type LessonChallenges = {
     challenge : Challenge;
@@ -49,7 +51,7 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
 
     const router = useRouter();
     const [lessonId] = useState(initialLessonId)
-    const [thunders, setThunders] = useState(initialThunders)
+    const [thunders] = useState(initialThunders)
     const [percentage, setPercentage] = useState(() => {
         return initialPercentage === 100 ? 0 : initialPercentage;
     })
@@ -61,23 +63,22 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
 
     const [selectedOption, setSelectedOption] = useState<number>();
     const [status, setStatus] = useState<"correct" | "wrong" | "completed" | "none">("none")
-
-    
-
     const challenge = challenges [activeIndex];
     const options = challenge?.challenge_options ?? [];
     const onNext = () => {
         setActiveIndex((current) => current + 1)
     };
+    
 
     const handleClick = () => {
-        router.push("/courses")
+        router.push('/home')
+    
     }
 
-    if(true || !challenge) {
+    if(!challenge) {
         return (
             <>
-                <div className={`${soraFont.className} w-full h-screen flex justify-center items-center`}>
+                <div className="w-full h-screen flex justify-center items-center">
                     <div className="flex flex-col justify-center items-center gap-y-8 lg:gap-y-14">
                         <div className="flex justify-center items-center w-[200px] h-[150px]">
                             <RiveComponent />
@@ -137,7 +138,7 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
             onNext();
             setStatus("none")
             setSelectedOption(undefined)
-            return;
+            return;  
         }
 
         const correctOption = options.find((option) => option.correct)
@@ -151,19 +152,31 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
                 upsertChallengeProgress(challenge.challenge.id)
                     .then((response) => {
                         if (response?.error === "thunders") {
-                            console.error("Missing Thunder")
+                            toast("Sudah max thundersmu woy!")
                         }
 
                         setStatus("correct");
                         setPercentage((prev) => prev + 100 / challenges.length);
-
+                        /*
                         if (initialPercentage === 100) {
                             setThunders((prev) => Math.min(prev + 1, 3))
-                        }
+                        } */
+                       if(percentage + 100 / challenges.length >= 100) {
+                            upsertThunders(initialLessonId)
+                                .then((response) => {
+                                    if(response.success) {
+                                        toast.success("Selesai!")
+                                    }
+                                })
+                                .catch(() => toast.error("Gagal menambah thunder"))
+                       }
                     })
                     .catch(() => toast.error("coba lagi kalau error"))
             })
-        } else {
+            
+        } 
+        /*
+        else {
             startTransition(() => {
                 reduceThunders(challenge.challenge.id)
                     .then((response) => {
@@ -181,10 +194,11 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
                     .catch(() => toast.error("Coba lagi kalau error"))
             })
         } 
+        */
     }
 
     const title = challenge?.type === "ASSIST"
-        ? "Sellect the correct meaning" : challenge?.question;
+        ? "Select the correct meaning" : challenge?.question;
 
     return (
         <div className="min-h-screen w-full flex flex-col">
@@ -204,7 +218,7 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
                                 <div>ASSIST</div>
                             )}
                             <Options
-                                options={challenge.challenge_options.map(challenge => ({
+                                options={challenge?.challenge_options.map(challenge => ({
                                     id: challenge.id,
                                     challenge_id: challenge.challenge_id,
                                     text: challenge.text,

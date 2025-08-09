@@ -51,6 +51,32 @@ export const upsertUserProgress = async (courseId:number) => {
     redirect(`/courses/${course.slug}`);
 }
 
+export const upsertThunders = async (courseId: number) => {
+    const supabase = await createClient();
+    const {data: {user}, error } = await supabase.auth.getUser();
+
+    if (!user || error) {
+        console.log('Unauthorized', error)
+    }
+    
+    const course = await getCourseById(courseId);
+
+    const currentUserProgress = await getUserProgress();
+
+    const upThunders = Math.min(currentUserProgress.thunders + 1, 3);
+
+    await supabase.from('user_progress').update({
+        thunders: upThunders
+    })
+    .eq("user_id", user?.id)
+
+    return {success: true, thunders: upThunders}
+
+    revalidatePath("learn");
+    revalidatePath(`/courses/${course.slug}`);
+    redirect(`/courses/${course.slug}`); // ganti kalau sudah aman semua ke slugnya 
+}
+
 export const reduceThunders = async (challengeId: number) => {
     const supabase = await createClient();
     const { data: {user}, error } = await supabase.auth.getUser();
@@ -89,6 +115,7 @@ export const reduceThunders = async (challengeId: number) => {
 
 
     if(currentUserProgress.thunders === 0) {
+        console.log("nggak ada thunders woy");
         return { error: "thunders"}
     }
 

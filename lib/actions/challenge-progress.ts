@@ -26,6 +26,7 @@ export const upsertChallengeProgress = async (challengeId: number) => {
     .maybeSingle();
 
     if(!challengeData || errorChallenge ) {
+        console.log("Challenge not found")
         throw new Error("Challenge not found")
     }
 
@@ -69,7 +70,7 @@ export const upsertChallengeProgress = async (challengeId: number) => {
 
     const {data: existingChallengeProgress, error: errorExistingChallengeProgress} = await supabase.from("challenge_progress").select("*")
     .eq("user_id", userId)
-    .eq("id", challengeId)
+    .eq("challenge_id", challengeId) // terakhir, diganti dari yang sebelumnya "id"
     .maybeSingle();
 
      if (errorExistingChallengeProgress){
@@ -79,7 +80,8 @@ export const upsertChallengeProgress = async (challengeId: number) => {
 
     const isPractice = !!existingChallengeProgress;
 
-    if (currentUserProgress.thunders === 0 && !isPractice) {
+    if (currentUserProgress.thunders === 3 && !isPractice) {
+        console.log("Sudah max thunders woy")
         return {error: "thunder"}
     }
 
@@ -93,8 +95,7 @@ export const upsertChallengeProgress = async (challengeId: number) => {
         }
 
         const {error: updateUserError} = await supabase.from("user_progress").update({
-            thunders: Math.min(currentUserProgress.thunders + 1, 3),
-            points: currentUserProgress.points + 20,
+            points: currentUserProgress.points + 2,
         })
         .eq("user_id", userId)
 
@@ -115,7 +116,7 @@ export const upsertChallengeProgress = async (challengeId: number) => {
       .from("challenge_progress")
       .insert({ challenge_id: challengeId, user_id: userId, completed: true });
 
-    await supabase.from("user_progress").upsert({ points: currentUserProgress.points + 10})
+    await supabase.from("user_progress").update({points: currentUserProgress.points + 4}) // Update thunders kalau sudah selesai lessons
     .eq("user_id", userId)
     .maybeSingle();
 

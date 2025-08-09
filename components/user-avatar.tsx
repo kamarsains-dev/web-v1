@@ -9,6 +9,7 @@ import {
 import { createClient } from "@/lib/supabase/server";
 import SignOut from "@/app/(auth)/_component/signout";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function UserAvatar() {
     const supabase = await createClient();
@@ -25,12 +26,28 @@ export default async function UserAvatar() {
         return email?.charAt(0).toUpperCase() ?? "";
     };
 
+    const userMetadata = data.user.user_metadata;
+
+    const userAvatar = userMetadata?.avatar_url;
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer">
                 <div className="flex items-center gap-2">
-                    <div className="w-11 h-11 rounded-full border-2  flex items-center justify-center text-lg font-bold text-gray-500">
-                        {getInitial(data?.user?.email)}
+                    <div>
+                        {userAvatar ? (
+                            <Image 
+                                src={userAvatar as string}
+                                width={44}
+                                height={44}
+                                alt="Profile Picture"
+                                className="w-11 h-11 rounded-full border-2"
+                            />
+                        ) : (
+                            <div className="w-11 h-11 rounded-full border-2  flex items-center justify-center text-lg font-bold text-gray-500">
+                                {getInitial(data?.user?.email)}    
+                            </div>
+                        )} 
                     </div>
                 </div>   
             </DropdownMenuTrigger>

@@ -1,5 +1,5 @@
 import { getLesson, getUserProgress } from "@/lib/queries";
-import { Quiz } from "../../component/quiz";
+import { Quiz } from "../quiz";
 import { redirect } from "next/navigation";
 
 //type Props = {
