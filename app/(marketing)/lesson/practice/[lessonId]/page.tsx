@@ -4,13 +4,13 @@ import { redirect } from "next/navigation";
 
 type Props = {
     params: {
-        lessonId: number;
+        lessonId: string;
     };
 }
 
 const LessonIdPage = async ({params}: Props) => {
     const {lessonId} = await params;
-    const activeLesson = await getLesson(lessonId); 
+    const activeLesson = await getLesson(Number(lessonId)); 
     const userProgressData = await getUserProgress(); 
 
     const [lesson, userProgress] = await Promise.all([activeLesson, userProgressData])
