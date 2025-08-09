@@ -7,7 +7,6 @@
 import Image from "next/image";
 import CurrentBtn from "@/public/current-btn.svg"
 import LockedBtn from "@/public/lock-btn.svg"
-import { useParams } from "next/navigation";
 import ActiveBtn from "./rive-lesson";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -24,7 +23,6 @@ type Props = {
 };
 
 export const LessonButton = ({id, index, locked, current, title, userThunders}: Props) => { //add percentage, totalCounts
-    const {slug} = useParams();
 
     const cycleLength = 5;
     const cycleIndex = index % cycleLength;
