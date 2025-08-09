@@ -2,13 +2,13 @@ import { getLesson, getUserProgress } from "@/lib/queries";
 import { Quiz } from "../../../component/quiz";
 import { redirect } from "next/navigation";
 
-type Props = {
+type LessonIdPageProps = {
     params: Promise<{
         lessonId: string;
     }>;
 }
 
-const LessonIdPage = async ({params}: Props) => {
+const LessonIdPage = async ({params}: LessonIdPageProps) => {
     const {lessonId} = await params;
     const activeLesson = await getLesson(Number(lessonId)); 
     const userProgressData = await getUserProgress(); 
