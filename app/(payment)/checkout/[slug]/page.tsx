@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import CheckoutClient from "./component/checkout-client";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function CheckoutPage({ params }: Props) {
