@@ -2,7 +2,7 @@ import { LessonButton } from "./lesson-button";
 import UnitBanner from "./unit-banner";
 import { Lesson, getUserProgress } from "@/lib/queries";
 
-type Props = {    
+type Props = {  
     title: string;
     description: string;
     activeLesson: Lesson | undefined;

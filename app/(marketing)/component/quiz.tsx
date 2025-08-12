@@ -162,7 +162,7 @@ export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  init
                             setThunders((prev) => Math.min(prev + 1, 3))
                         } */
                        if(percentage + 100 / challenges.length >= 100) {
-                            upsertThunders(initialLessonId)
+                            upsertThunders!(initialLessonId)
                                 .then((response) => {
                                     if(response.success) {
                                         toast.success("Selesai!")

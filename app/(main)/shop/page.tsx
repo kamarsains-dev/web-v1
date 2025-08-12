@@ -1,9 +1,25 @@
 import Image from "next/image";
 import Key from "@/public/light-key.svg"
 import FeatureTable from "./component/table";
-import Price from "./component/price";
+import PricePackages from "./component/price-packages";
+import { createClient } from '@/lib/supabase/server';
 
-const Shop = () => {
+const Shop = async () => {
+     const supabase = await createClient();
+
+    const {data: pricingPackagesData, error} = await supabase
+    .from("pricing_packages")
+    .select("*")
+    .order("id", {ascending: true})
+
+    if(error || !pricingPackagesData) {
+        console.log("Error fetching pricing packages", error)
+        return (
+            <div className='text-white'>
+                Terjadi kesalahan saat memuat data harga. Coba lagi nanti.
+            </div>
+        )
+    }
     return (
         <div className=" bg-hero-pattern mt-13">
             <div className="w-full bg-star-pattern flex flex-col justify-center items-center gap-y-4 py-12">
@@ -14,7 +30,7 @@ const Shop = () => {
                 alt="key"
                 className="w-64 lg:w-80"
                 />
-                <Price/>    
+                <PricePackages pricingPackagesData={pricingPackagesData}/>    
                 <div className="text-white flex justify-center items-center">
                    <FeatureTable/> 
                 </div>
