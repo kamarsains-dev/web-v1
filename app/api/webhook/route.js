@@ -9,12 +9,10 @@ export async function POST(request) {
 
     try {
         const payload = await request.json();
-        console.log("Midtrans webhook payload:", payload);
-        const {transaction_status, order_id, gross_amount, signature_key} = payload;
+        console.log("Raw webhook payload:", JSON.stringify(payload, null, 2));
+        const {transaction_status, order_id, gross_amount, signature_key, status_code} = payload;
 
-        const grossAmountClean = gross_amount.replace(/\.00$/, "");
-
-        const stringToHash = `${order_id}${grossAmountClean}${transaction_status}${serverKey}`;
+        const stringToHash = `${order_id}${status_code}${gross_amount}${serverKey}`;
 
         const hashed = crypto
             .createHash("sha512")
@@ -23,8 +21,10 @@ export async function POST(request) {
 
         if (hashed !== signature_key) {
             console.error("Invalid signature key:", {
-                received: signature_key,
-                expected: hashed,
+              received: signature_key,
+              expected: hashed,
+              stringUsed: stringToHash,
+              serverKeyUsed: serverKey,
             });
             return NextResponse.json({error: "Invalid signature key"}, {status: 401})
         }
