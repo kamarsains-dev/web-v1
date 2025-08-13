@@ -12,7 +12,9 @@ export async function POST(request) {
         console.log("Midtrans webhook payload:", payload);
         const {transaction_status, order_id, gross_amount, signature_key} = payload;
 
-        const stringToHash = `${order_id}${gross_amount}${transaction_status}${serverKey}`;
+        const grossAmountClean = gross_amount.replace(/\.00$/, "");
+
+        const stringToHash = `${order_id}${grossAmountClean}${transaction_status}${serverKey}`;
 
         const hashed = crypto
             .createHash("sha512")
