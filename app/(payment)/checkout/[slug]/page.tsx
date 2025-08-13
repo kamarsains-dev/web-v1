@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Blackhole from "@/public/blackhole.svg";
+
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import CheckoutClient from "./component/checkout-client";
@@ -43,17 +42,12 @@ export default async function CheckoutPage({ params }: Props) {
 
   return (
     <div className="flex min-h-screen bg-hero-pattern">
-      {/* Gambar di sisi kiri */}
-      <div className="w-full md:w-[60%] hidden md:flex justify-center items-center  bg-star-pattern text-white">
-        <Image src={Blackhole} width={200} height={200} alt="blackhole" />
-      </div>
-
       {/* Checkout Card */}
-      <div className="w-full md:w-[40%] flex flex-col justify-center gap-y-7 items-center p-4 bg-white">
-        <span className="flex md:hidden font-bold text-3xl mb-3">
+      <div className="w-full flex flex-col justify-center gap-y-7 items-center p-4 bg-star-pattern">
+        <span className="flex  font-bold text-3xl mb-3 text-white">
           <h1>Kamar Sains</h1>
         </span>
-        <Card className="w-full max-w-md shadow-lg ">
+        <Card className="w-full max-w-md">
           {/* Header */}
           <CardHeader>
             <CardTitle className="text-2xl font-bold flex justify-between">
@@ -93,7 +87,7 @@ export default async function CheckoutPage({ params }: Props) {
             <CheckoutClient packageId={packageId} />
           </CardFooter>
         </Card>
-         <span className="max-w-[340px] text-sm text-center text-gray-500">
+         <span className="max-w-[340px] text-sm text-center text-gray-300">
           <p>
             We’ll remind you before your subscription ends, so you’ll never lose access.
           </p>
