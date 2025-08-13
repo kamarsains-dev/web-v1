@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { addMonths } from "date-fns";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request) {
     const supabase = await createClient();
@@ -75,6 +76,10 @@ export async function POST(request) {
                 console.error("Failed to update subscription:", upsertError)
                 return NextResponse.json({error: 'Failed to update subscription'}, {status: 500})
             }
+            revalidatePath("/home");
+            revalidatePath("/lesson", "layout");
+            revalidatePath("/shop");
+            revalidatePath("/courses")
 
             return NextResponse.json({message: 'Success'}, {status: 200})
         
