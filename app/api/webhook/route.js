@@ -9,11 +9,14 @@ export async function POST(request) {
 
     try {
         const payload = await request.json();
+        console.log("Midtrans webhook payload:", payload);
         const {transaction_status, order_id, gross_amount, signature_key} = payload;
+
+        const stringToHash = `${order_id}${gross_amount}${transaction_status}${serverKey}`;
 
         const hashed = crypto
             .createHash("sha512")
-            .update(order_id + gross_amount + transaction_status + serverKey)
+            .update(stringToHash)
             .digest("hex");
 
         if (hashed !== signature_key) {
