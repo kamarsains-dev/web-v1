@@ -36,7 +36,7 @@ type Props = {
     initialThunders: number;
     initialLessonId: number;
     initialLessonChallenges: LessonChallenges[]
-    userSubscription: null;
+    userSubscription: boolean;
 }
 
 const inter = DM_Sans({
@@ -47,6 +47,7 @@ const inter = DM_Sans({
 
 
 export const Quiz = ({initialPercentage, initialThunders, initialLessonId,  initialLessonChallenges, userSubscription}: Props) => {
+    
     const [pending, startTransition] = useTransition();
 
     const router = useRouter();

@@ -1,13 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Checkout from "./checkout";
 
 export default function CheckoutClient({ packageId }: { packageId: number }) {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const fetchedRef = useRef(false);
 
   useEffect(() => {
+
+    if(fetchedRef.current) {
+      return;
+    }
+
+    fetchedRef.current = true;
+
     async function getToken() {
       try {
         const res = await fetch("/api/tokenizer", {

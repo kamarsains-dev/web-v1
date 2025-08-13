@@ -265,3 +265,32 @@ export const getAllLessonsByUnitId = async (unitId: number) => {
 
     return lessons;
 }
+
+
+export const getUserSubscription = cache(async () => {
+    const supabase = await createClient();
+
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    const userId = userData.user?.id
+
+    if(!userId || userError) {
+        return null
+    }
+
+    const {data:userSubscriptionData, error: subscriptionError} = await supabase.from("user_subscription")
+    .select("*")
+    .eq("user_id", userId)
+    .single();
+
+    if(!userSubscriptionData || subscriptionError) {
+        return null
+    }
+    const currentPeriodEnd = new Date(userSubscriptionData.current_period_end)
+
+    const isActive = currentPeriodEnd.getTime() > Date.now();
+
+    return {
+        ...userSubscriptionData,
+        isActive: !!isActive,
+    }
+})

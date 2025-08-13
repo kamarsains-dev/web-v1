@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 
 interface Props {
     token: string;
@@ -28,7 +29,7 @@ declare const snap: MidtransSnap;
 export default function Checkout({token}:Props) {
     useEffect(()=> {
         const script = document.createElement('script');
-        const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT!;
+        const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY!;
         script.src = `https://app.sandbox.midtrans.com/snap/snap.js`
         script.setAttribute('data-client-key', clientKey);
         script.async = true;
@@ -44,7 +45,7 @@ export default function Checkout({token}:Props) {
             snap.pay(token, {
                 onSuccess: function(result) {
                     console.log('Payment Success:', result)
-                    // redirect ke halaman success
+                    redirect('/home')
                 },
                 onPending: function(result) {
                     console.log('Payment pending', result)

@@ -1,4 +1,4 @@
-import { getLesson, getUserProgress } from "@/lib/queries";
+import { getLesson, getUserProgress, getUserSubscription } from "@/lib/queries";
 import { Quiz } from "../../../component/quiz";
 import { redirect } from "next/navigation";
 
@@ -12,8 +12,9 @@ const LessonIdPage = async ({params}: LessonIdPageProps) => {
     const {lessonId} = await params;
     const activeLesson = await getLesson(Number(lessonId)); 
     const userProgressData = await getUserProgress(); 
+    const userSubscriptionData = await getUserSubscription();
 
-    const [lesson, userProgress] = await Promise.all([activeLesson, userProgressData])
+    const [lesson, userProgress, userSubscription] = await Promise.all([activeLesson, userProgressData, userSubscriptionData])
 
     if(!lesson || !userProgress) {
         console.log("Error no lesson data", lesson)
@@ -23,6 +24,7 @@ const LessonIdPage = async ({params}: LessonIdPageProps) => {
     const initialPercentage = lesson.challenges.filter((challenge) => challenge.completed)
         .length / lesson.challenges.length * 100;  
     
+    const isPremium = !!userSubscription?.isActive
 
     return (
         <Quiz
@@ -38,7 +40,7 @@ const LessonIdPage = async ({params}: LessonIdPageProps) => {
             }))}
             initialThunders={userProgress.thunders}
             initialPercentage={initialPercentage}
-            userSubscription={null}
+            userSubscription={isPremium}
         />
     );
 };
