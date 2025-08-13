@@ -61,9 +61,8 @@ export default function Checkout({token}:Props) {
     }
 
     return (
-        <div>
-            <p className="">Lanjutkan Pembayaran</p>
-            <Button onClick={handlePay}>
+        <div className="w-full">
+            <Button onClick={handlePay} sweep variant='septenary' className="w-full rounded-xl font-bold text-lg h-14">
                 Bayar Sekarang
             </Button>
         </div>

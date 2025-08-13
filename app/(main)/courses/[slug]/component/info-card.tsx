@@ -1,6 +1,5 @@
 import {
     Card,
-    CardContent,
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
@@ -36,16 +35,14 @@ const InfoCard = async () => {
                             alt="level-up"
                             className="mb-3"
                         />
-                        <CardTitle>
+                        <CardTitle className="text-2xl">
                             {courseData.title}
                         </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="flex w-full items-center gap-x-2">
+                         <div className="flex w-full items-center gap-x-2">
                             <CircularProgress value={100} size={30} strokeWidth={7}/>
                             <h1 className="text-md text-gray-400">Semua selesai!</h1> 
                         </div>
-                    </CardContent>
+                    </CardHeader>
                 </Card>
             </div>
         )
@@ -68,16 +65,14 @@ const InfoCard = async () => {
                         alt="level-up"
                         className="mb-3"
                     />
-                    <CardTitle>
+                    <CardTitle className="text-2xl">
                         {courseData.title}
                     </CardTitle>
-                </CardHeader>
-                <CardContent>
                     <div className="flex w-full items-center gap-x-2">
                         <CircularProgress value={lessonProgress} size={30} strokeWidth={7}/>
                         <h1 className="text-md text-gray-400"> {completedLessons} dari {totalLessons} selesai</h1> 
                     </div>
-                </CardContent>
+                </CardHeader>
             </Card>
         </div>
     );

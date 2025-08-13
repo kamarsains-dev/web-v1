@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Checkout from "./checkout";
-import { Button } from "@/components/ui/button";
 
 export default function CheckoutClient({ packageId }: { packageId: number }) {
   const [token, setToken] = useState<string | null>(null);
@@ -40,8 +39,10 @@ export default function CheckoutClient({ packageId }: { packageId: number }) {
 
   return (
     <>
-      <Checkout token={token} />
-      <Button onClick={() => window.location.reload()}>Coba Ulang</Button>
+      <span className="flex gap-x-4 w-full">
+        <Checkout token={token} />
+      </span>
+     
     </>
   );
 }
