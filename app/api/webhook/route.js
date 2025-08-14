@@ -73,7 +73,9 @@ export async function POST(request) {
                 package_id: orderData.package_id,
                 current_period_end: currentPeriodEnd.toISOString(),
                 is_active: true,
-              });
+              }, {onConflict: "user_id"})
+              .select()
+              .single();
 
             if(upsertError) {
                 console.error("Failed to update subscription:", upsertError)
