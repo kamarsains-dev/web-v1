@@ -14,6 +14,8 @@ const seed = async () => {
       {table: "challenges", column: "id"},
       {table: "challenge_options", column: "id"},
       {table: "challenge_progress", column: "id"},
+      {table: "orders", column: "id"},
+      {table: "user_subscription", column: "id"}
     ]
     for (const {table, column} of tableConfigs) {
     const {error: errorTableData} = await supabase.from(table).delete().not(column, "is", null);
@@ -22,8 +24,6 @@ const seed = async () => {
     } else { 
       console.log(`Done ${tableConfigs}`);
     }
-  
-  
     }
     
     console.log("Seeding courses...");
@@ -303,6 +303,8 @@ const seed = async () => {
     if (challengeOptionsError) {
       console.log("Error seeding challenges", challengeOptionsError);
     }
+
+    
 }
 
 seed();

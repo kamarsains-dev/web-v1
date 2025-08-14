@@ -86,10 +86,40 @@ export async function POST(request) {
 
             return NextResponse.json({message: 'Success'}, {status: 200})
         
-        } else {
-            //TODO: add status pending, expired, failure
-            return NextResponse.json({message: `transaction status is ${transaction_status}` }, {status: 200})
         }
+
+        if(transaction_status === "pending") {
+            return NextResponse.json({message: "Payment pending"}, {status: 200})
+        }
+
+        if(transaction_status === "expire" || transaction_status === "expired") {
+            return NextResponse.json({message: 'Payment expired'}, {status: 200})
+        }
+
+        if(transaction_status === "deny" || transaction_status === "failed" || transaction_status === "failure") {
+
+            const {error: updateOrdersError} = await supabase.from("orders")
+            .update({status: 'failed'})
+            .eq("order_id", order_id)
+
+            if(updateOrdersError) {
+                console.log("Failed to update orders", updateOrdersError)
+            return NextResponse.json({error: 'Failed to update orders'}, {status: 500})
+            }
+
+            const {error: updateUserSubscriptionError} = await supabase.from("user_subscription")
+            .update({is_active: false})
+            .eq('order_id', order_id);
+
+            if(updateUserSubscriptionError) {
+                console.log("Failed to update user subscription status", updateUserSubscriptionError)
+                return NextResponse.json({error: 'Failed to update subscription status'}, {status: 500})
+            }
+        
+            return NextResponse.json({message: "Payment failed"}, {status: 200})
+        }
+        
+        return NextResponse.json({message: `transaction status is ${transaction_status}` }, {status: 200})
     } catch (error) {
         console.error("Processing error", error)
         return NextResponse.json({error: "Internal server error"}, {status: 500})
