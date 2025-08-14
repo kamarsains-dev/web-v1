@@ -1,11 +1,10 @@
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 
-
 type Props = {
     order: {
         order_id: string;
-        package_id: string;
+        packageName: string;
         status: string;
         created_at: string
         currentPeriodEnd: string;
@@ -55,13 +54,13 @@ const PaymentCard = ({order}:Props) => {
                 
                 <span className="flex justify-between font-bold text-[16px]">
                     <div>
-                        <h1>{order.package_id}</h1>
+                        <h1>{order.packageName}</h1>
                         <p className="text-[12px] font-normal text-gray-500">
                             {order.order_id}
                         </p>
                     </div>
                    <div className="flex justify-between">
-                     <h1>Rp{price}</h1>                    
+                     <h1>{price}</h1>                    
                     </div>
                 </span>
             </div>

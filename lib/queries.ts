@@ -55,10 +55,27 @@ export const getCourses = cache(async () => {
 export const getOrders = cache(async (userId: string) => {
     const supabase = await createClient();
 
-    const {data, error} = await supabase.from("orders").select('*').eq('user_id', userId)
+    const {data, error} = await supabase
+    .from("orders")
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', {ascending: false})
 
     if(error) throw(error)
     return data;
+})
+
+export const getPackageDetails = (async (packageId: number) => { 
+    const supabase = await createClient();
+
+    const {data, error} = await supabase
+    .from("pricing_packages")
+    .select("*")
+    .eq("id", packageId)
+    .single();
+
+    if(error) throw(error)
+    return data
 })
 
 export const getCourseById = cache(async (courseId: number) => {
