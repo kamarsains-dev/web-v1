@@ -1,15 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createClient } from "@/lib/supabase/server";
+import PaymentList from "./payment-list";
+import { getOrders } from "@/lib/queries";
 
 export default async function TabsUnderlinedDemo() {
-
     const supabase = await createClient();
+   
 
-    const { data, error } = await supabase.auth.getUser();
-    if (error || !data?.user) {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    
+    const userId = userData?.user
+
+    if (userError || !userId) {
         return null;
     }
+    
+    const ordersData = await getOrders(userId.id);  
+
     const getEmail = (email?: string) => {
         return email;
     }
@@ -59,7 +67,7 @@ export default async function TabsUnderlinedDemo() {
                             name="username"
                             type="text"
                             disabled
-                            placeholder={getUserName(data?.user.user_metadata?.full_name)}
+                            placeholder={getUserName(userId.user_metadata?.full_name)}
                             className="w-full px-4 py-3 rounded-xl border-2"
                         />
                     </div>
@@ -70,7 +78,7 @@ export default async function TabsUnderlinedDemo() {
                             name="username"
                             type="text"
                             disabled
-                            placeholder={getUserName(data?.user.user_metadata?.name)}
+                            placeholder={getUserName(userId.user_metadata?.name)}
                             className="w-full px-4 py-3 rounded-xl border-2"
                         />
                     </div>
@@ -88,7 +96,7 @@ export default async function TabsUnderlinedDemo() {
                             name="email"
                             type="email"
                             disabled
-                            placeholder={getEmail(data?.user.email)}
+                            placeholder={getEmail(userId.email)}
                             className="w-full px-4 py-3 rounded-xl border-2 cursor-not-allowed"
                         />
                     </div>
@@ -193,10 +201,12 @@ export default async function TabsUnderlinedDemo() {
         </TabsContent>
         <TabsContent value="payment">
             <div className="mt-5">
-                <div>
+                <span>
                     <h1 className="text-xl font-bold">Payment History</h1>
-                    <div className="w-full border-t border border-gray-200 flex-grow my-5"></div>
-                </div>
+                </span>
+                <PaymentList 
+                    orders={ordersData}
+                />
             </div>
         </TabsContent>    
     </Tabs>

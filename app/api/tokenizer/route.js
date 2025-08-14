@@ -28,7 +28,8 @@ export async function POST(request) {
         user_name: user.user_metadata?.name || user.email,
         order_id: orderId,
         package_id: packageId,
-        status: 'pending'
+        status: 'pending',
+        provider: 'midtrans'
       })
 
     if (insertError) {

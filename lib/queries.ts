@@ -52,6 +52,15 @@ export const getCourses = cache(async () => {
     return data;
 });
 
+export const getOrders = cache(async (userId: string) => {
+    const supabase = await createClient();
+
+    const {data, error} = await supabase.from("orders").select('*').eq('user_id', userId)
+
+    if(error) throw(error)
+    return data;
+})
+
 export const getCourseById = cache(async (courseId: number) => {
     const supabase = await createClient();
 
