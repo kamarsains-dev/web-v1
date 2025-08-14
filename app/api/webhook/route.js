@@ -68,8 +68,10 @@ export async function POST(request) {
             .from("user_subscription")
             .upsert({
                 user_id: orderData.user_id,
+                order_id: order_id,
                 package_id: orderData.package_id,
-                current_period_end: currentPeriodEnd.toISOString(),
+                current_period_end: currentPeriodEnd,
+                is_active: true,
             })
 
             if(upsertError) {

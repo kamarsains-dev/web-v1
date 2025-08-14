@@ -6,10 +6,13 @@ import Nav from "@/components/ui/nav";
 import Key from "@/public/key.svg";
 import Thunder from "@/public/thunder-icon.svg"
 import UserAvatar from "@/components/user-avatar";
-import { getUserProgress } from "@/lib/queries";
+import { getUserProgress, getUserSubscription } from "@/lib/queries";
 
 const UserHeader = async () => {
     const userProgressData = await getUserProgress();
+    const userSubscriptionData = await getUserSubscription();
+
+    const isPremium = userSubscriptionData?.is_active === true;
 
     return (
         <div className="h-14 w-full border-b-2 bg-white px-4 fixed top-0 z-20">
@@ -42,7 +45,7 @@ const UserHeader = async () => {
                             height={21}
                             alt="key"
                         />
-                        <p>{userProgressData?.thunders ?? 0}</p>
+                        <p>{isPremium ? "∞" : userProgressData?.thunders ?? 0}</p>
                     </Button>
                      <Button variant="button" className="rounded-full text-xl font-bold">
                         <Image
