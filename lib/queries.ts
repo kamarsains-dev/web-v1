@@ -285,9 +285,18 @@ export const getUserSubscription = cache(async () => {
     if(!userSubscriptionData || subscriptionError) {
         return null
     }
+
     const currentPeriodEnd = new Date(userSubscriptionData.current_period_end)
 
     const isActive = currentPeriodEnd.getTime() > Date.now();
+
+    if(userSubscriptionData.is_active !== isActive) {
+        await supabase.from("user_subscription")
+        .update({is_active: isActive})
+        .eq("user_id", userId)
+
+        userSubscriptionData.is_active = isActive
+    }
 
     return {
         ...userSubscriptionData,
