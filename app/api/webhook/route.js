@@ -64,15 +64,15 @@ export async function POST(request) {
             const monthsToAdd = pricingPackage.duration_months;
             const currentPeriodEnd = addMonths(new Date(), monthsToAdd);
 
-            const {error: upsertError} = await supabase
-            .from("user_subscription")
-            .upsert({
+            const { error: upsertError } = await supabase
+              .from("user_subscription")
+              .upsert({
                 user_id: orderData.user_id,
                 order_id: order_id,
                 package_id: orderData.package_id,
-                current_period_end: currentPeriodEnd,
+                current_period_end: currentPeriodEnd.toISOString(),
                 is_active: true,
-            })
+              });
 
             if(upsertError) {
                 console.error("Failed to update subscription:", upsertError)

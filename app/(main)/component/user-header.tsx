@@ -12,7 +12,7 @@ const UserHeader = async () => {
     const userProgressData = await getUserProgress();
     const userSubscriptionData = await getUserSubscription();
 
-    const isPremium = userSubscriptionData?.isActive
+    const isPremium = userSubscriptionData?.isActive ?? false;
 
     return (
         <div className="h-14 w-full border-b-2 bg-white px-4 fixed top-0 z-20">

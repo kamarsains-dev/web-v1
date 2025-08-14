@@ -291,6 +291,6 @@ export const getUserSubscription = cache(async () => {
 
     return {
         ...userSubscriptionData,
-        isActive: !!isActive,
+        isActive,
     }
 })
