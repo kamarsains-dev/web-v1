@@ -6,8 +6,14 @@ const LessonPage = async () => {
     const activeLesson = await getLesson(); 
     const userProgressData = await getUserProgress(); 
     const userSubscriptionData = await getUserSubscription();
-
     const [lesson, userProgress, userSubscription] = await Promise.all([activeLesson, userProgressData, userSubscriptionData])
+
+    const isPremium = !!userSubscription?.isActive
+
+    if(userProgress.thunders >= 3 && !isPremium) {
+        redirect('/courses')
+    }
+
 
     if(!lesson || !userProgress) {
         console.log("Error no lesson data", lesson)
@@ -17,7 +23,7 @@ const LessonPage = async () => {
     const initialPercentage = lesson.challenges.filter((challenge) => challenge.completed)
         .length / lesson.challenges.length * 100;  
     
-    const isPremium = !!userSubscription?.isActive
+    
 
     return (
         <Quiz

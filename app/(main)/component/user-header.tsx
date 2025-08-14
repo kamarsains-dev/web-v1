@@ -7,6 +7,7 @@ import Key from "@/public/key.svg";
 import Thunder from "@/public/thunder-icon.svg"
 import UserAvatar from "@/components/user-avatar";
 import { getUserProgress, getUserSubscription } from "@/lib/queries";
+import { InfinityIcon } from "lucide-react";
 
 const UserHeader = async () => {
     const userProgressData = await getUserProgress();
@@ -45,7 +46,7 @@ const UserHeader = async () => {
                             height={21}
                             alt="key"
                         />
-                        <p>{isPremium ? "∞" : userProgressData?.thunders ?? 0}</p>
+                        <p>{isPremium ? <InfinityIcon className="w-9 stroke-3"/> : userProgressData?.thunders ?? 0}</p>
                     </Button>
                      <Button variant="button" className="rounded-full text-xl font-bold">
                         <Image

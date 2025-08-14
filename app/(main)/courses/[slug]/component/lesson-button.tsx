@@ -20,9 +20,10 @@ type Props = {
     percentage: number;
     title: string;
     userThunders: number;
+    isPremium: boolean;
 };
 
-export const LessonButton = ({id, index, locked, current, title, userThunders}: Props) => { //add percentage, totalCounts
+export const LessonButton = ({id, index, locked, current, title, userThunders, isPremium}: Props) => { //add percentage, totalCounts
 
     const cycleLength = 5;
     const cycleIndex = index % cycleLength;
@@ -44,9 +45,9 @@ export const LessonButton = ({id, index, locked, current, title, userThunders}: 
 
     const isFirst = index === 0;
    // const isLast = index === totalCount;
-    const isCompleted = !current && !locked
+    const isCompleted = !current && (!locked || isPremium)
 
-    const isDisabled = userThunders >= 3;
+    const isDisabled = !isPremium && userThunders >= 3;
 
     const handleClick = (res: React.MouseEvent) => {
         if(isDisabled) {

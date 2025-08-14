@@ -27,7 +27,7 @@ export const Header = ({thunders, percentage, hasActiveSubscription}: Props) => 
                     alt="thunders"
                     className="mr-2"
                 />
-                {hasActiveSubscription ? <InfinityIcon className="w-6 stroke-2"/> : thunders}
+                {hasActiveSubscription ? <InfinityIcon className="w-6 stroke-3" /> : thunders}
             </div>
         </header>
     )
