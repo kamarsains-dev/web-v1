@@ -106,15 +106,6 @@ export async function POST(request) {
                 console.log("Failed to update orders", updateOrdersError)
             return NextResponse.json({error: 'Failed to update orders'}, {status: 500})
             }
-
-            const {error: updateUserSubscriptionError} = await supabase.from("user_subscription")
-            .update({is_active: false})
-            .eq('order_id', order_id);
-
-            if(updateUserSubscriptionError) {
-                console.log("Failed to update user subscription status", updateUserSubscriptionError)
-                return NextResponse.json({error: 'Failed to update subscription status'}, {status: 500})
-            }
         
             return NextResponse.json({message: "Payment failed"}, {status: 200})
         }
