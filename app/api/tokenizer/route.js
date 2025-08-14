@@ -25,6 +25,7 @@ export async function POST(request) {
     const { error: insertError} = await supabase.from("orders")
       .insert({
         user_id: user.id,
+        user_name: user.user_metadata?.name || user.email,
         order_id: orderId,
         package_id: packageId,
         status: 'pending'

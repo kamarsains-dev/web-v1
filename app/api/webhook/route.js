@@ -33,7 +33,7 @@ export async function POST(request) {
         if(transaction_status === 'settlement' || transaction_status === 'capture'){
             const {data: orderData, error: orderError} = await supabase
             .from("orders")
-            .select("user_id, package_id")
+            .select("user_id, user_name, package_id")
             .eq("order_id", order_id)
             .single();
 
@@ -68,6 +68,7 @@ export async function POST(request) {
               .from("user_subscription")
               .upsert({
                 user_id: orderData.user_id,
+                user_name: orderData.user_name,
                 order_id: order_id,
                 package_id: orderData.package_id,
                 current_period_end: currentPeriodEnd.toISOString(),
