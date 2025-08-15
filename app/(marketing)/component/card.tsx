@@ -13,17 +13,19 @@ type Props = {
     disabled?: boolean;
     status?: "correct" | "wrong" | "completed" | "none";
     type: "SELECT" | "ASSIST";
+    isCorrect?: boolean;
+    isCompleted?: boolean;
 }
 
     
 
-export const Card = ({imageSrc, text, shortcut, selected, onClick, disabled, status, type}: Props) => {
+export const Card = ({imageSrc, text, shortcut, selected, onClick, disabled, status, type, isCorrect=false, isCompleted=false}: Props) => {
 
     const handleClick = useCallback(() => {
-        if (disabled) return;
+        if (disabled || isCompleted) return;
         
         onClick();
-    },[disabled, onClick]); 
+    },[disabled, onClick, isCompleted]); 
 
     useKey(shortcut, handleClick, {}, [handleClick])
 
@@ -32,7 +34,9 @@ export const Card = ({imageSrc, text, shortcut, selected, onClick, disabled, sta
         selected && "border-blue-700 bg-blue-100",
         selected && status === "correct" && "border-green-500 bg-green-50",
         selected && status === "wrong" && "border-amber-300 bg-amber-50",
-        disabled && "pointer-event-none hover:bg-white",
+        disabled && "pointer-events-none hover:bg-white",
+        isCorrect && "border-green-500 bg-green-50 pointer-events-none",
+        (disabled || isCompleted) && "pointer-events-none opacity-75",
         type === "ASSIST" && "lg:p-3 w-full"
         )}>
             {imageSrc && (

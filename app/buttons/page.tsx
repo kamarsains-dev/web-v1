@@ -9,9 +9,23 @@ import { UseHaptic } from "@/lib/useHaptic";
 import Sweep from "@/components/ui/sweep";
 import RiveWrapper from "./component/rive-wrapper";
 import RiveComponent from "./component/rive";
+import { toast } from "sonner";
 
 const ButtonPage = () => {
     const vibrate = UseHaptic(50)
+
+    const handleSuccess = () => {
+        toast.success("success")
+    }
+
+     const handleError = () => {
+        toast.error("Error")
+    }
+
+    const handleWarning = () => {
+        toast.warning("Warning")
+    }
+
 
     return (
         <div className="p-4 space-y-4 flex flex-col max-w-[200px] ">
@@ -27,15 +41,15 @@ const ButtonPage = () => {
             Default
             <Sweep/>
             </Button>
-            <Button variant="primary"
-            >Primary
+            <Button onClick={handleSuccess} variant="primary"
+            >Primary Sukses
             </Button>
-            <Button variant="outline"
-            >Outlines
+            <Button onClick={handleError} variant="outline"
+            >Outlines Error
             </Button>
-            <Button variant="secondary"
+            <Button variant="secondary" onClick={handleWarning}
             >
-            secondary
+            secondary warning
             </Button>
             <Button variant="tertiary"
             >

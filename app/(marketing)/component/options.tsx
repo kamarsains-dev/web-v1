@@ -10,18 +10,24 @@ type Props = {
     selectedOption?: number;
     disabled?: boolean;
     type: "SELECT" | "ASSIST";
+    correctOptionId: number | undefined;
+    isCompleted?: boolean;
 };
 
-export const Options = ({options, onSelect, status, selectedOption, type, disabled}: Props) => {
+export const Options = ({options, onSelect, status, selectedOption, type, disabled, correctOptionId, isCompleted=false}: Props) => {
+    
+
     return (
         <div className={cn(
-            "grid gap-2",
-            type === "ASSIST" && "grid-cols-1",
-            type === "SELECT" && "grid-cols-2"
+            "grid grid-rows-3 grid-flow-col gap-2",
+            type === "ASSIST" && "",
+            type === "SELECT" && ""
         )}>
             {options.map((option, i) =>  {
+                const isCorrect = option.correct && (correctOptionId === option.id || isCompleted)
+
                 return (
-                        <Card 
+                    <Card 
                             key={option.id}
                             id={option.id}
                             text={option.text}
@@ -32,7 +38,11 @@ export const Options = ({options, onSelect, status, selectedOption, type, disabl
                             status={status}
                             disabled={disabled}
                             type={type}
+                            isCorrect={isCorrect}
+                            isCompleted={isCompleted}
                         />
+
+                        
                     )   
             })}  
         </div>

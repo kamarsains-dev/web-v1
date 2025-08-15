@@ -54,7 +54,10 @@ export const Quiz = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number>();
   const [status, setStatus] = useState<"correct" | "wrong" | "completed" | "none">("none");
- // const [correctOptionId, setCorrectOptionId] = useEffect(false)
+
+  const [correctOptionId, setCorrectOptionId] = useState<number | undefined>()
+    const [completedChallenges, setCompletedChallenges] = useState<Set<number>>(new Set());
+
 
   const questionRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -114,9 +117,10 @@ export const Quiz = ({
   }
 
   const onSelect = (id: number) => {
-    if (status !== "none") return;
+    if (status !== "none" || completedChallenges.has(challenge.challenge.id)) return;
     setSelectedOption(id);
   };
+
 
   const onContinue = () => {
     if (!selectedOption) return;
@@ -131,6 +135,7 @@ export const Quiz = ({
       onNext();
       setStatus("none");
       setSelectedOption(undefined);
+        setCorrectOptionId(undefined);
       return;
     }
 
@@ -146,7 +151,10 @@ export const Quiz = ({
               toast("Sudah max thundersmu woy!");
             }
 
+            setCorrectOptionId(correctOption.id)
             setStatus("correct");
+            setCompletedChallenges(prev => new Set([...prev, challenge.challenge.id]));
+
             setPercentage((prev) => prev + 100 / challenges.length);
 
             if (percentage + 100 / challenges.length >= 100) {
@@ -156,11 +164,14 @@ export const Quiz = ({
                 })
                 .catch(() => toast.error("Gagal menambah thunder"));
             }
+
+
           })
           .catch(() => toast.error("Coba lagi kalau error"));
-      });
+      })
+
     } else {
-      setStatus("wrong");
+        setStatus("wrong");
     }
   };
 
@@ -181,13 +192,16 @@ export const Quiz = ({
             const challengeQuestion =
                 challenge.type === "ASSIST" ? "Select the correct meaning" : challenge.question;
 
+            const isCompleted = completedChallenges.has(challenge.challenge.id);
+
+
             return (
                 <div
                 key={challenge.challenge.id}
                 ref={(el) => { questionRef.current[index] = el; }}
                 className="min-h-screen lg:w-[600px] max-w-3xl w-full flex flex-col justify-center mx-auto gap-y-8"
                 >
-                <h1 className="text-start">{challengeQuestion}</h1>
+                <h1 className="text-justify">{challengeQuestion}</h1>
                 <div>
                     {challenge.type === "ASSIST" && <div>ASSIST</div>}
                     <Options
@@ -203,6 +217,8 @@ export const Quiz = ({
                     selectedOption={selectedOption}
                     disabled={pending}
                     type={challenge.type}
+                    correctOptionId={correctOptionId}
+                    isCompleted={isCompleted}
                     />
                 </div>
                 </div>
