@@ -20,7 +20,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "Paket tidak ditemukan" }, { status: 404 });
     }
     
-    const orderId = `KAMARSAINS-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    const orderId = `KS-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
     const { error: insertError} = await supabase.from("orders")
       .insert({

@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-
 export async function getUserSession() {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.getUser();
@@ -92,4 +91,37 @@ export async function signInWithGoogle() {
   }
 
   revalidatePath("/home", "layout")
+}
+
+export async function changePassword (formData: FormData) {
+  const newPassword = formData.get("new-password") as string;
+  const confirmPassword = formData.get('confirm-password') as string;
+
+  if (newPassword.length < 6) {
+    return { error: "Kata sandi minimal harus 6 karakter." };
+  }
+
+  if(newPassword !== confirmPassword) {
+    return {error: "Kata sandi baru dan konfirmasi tidak cocok."}
+  }
+
+  const supabase = await createClient()
+  const { error } = await supabase.auth.updateUser({ password: newPassword });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  await supabase.auth.signOut();
+
+  return {success: "Kata sandi berhasil diubah. Balik login"}
+}
+
+export async function deleteAccount() {
+  const supabase = await createClient()
+
+  await supabase.auth.signOut();
+
+  return {success: "Akun berhasil dihapus.", error: "Gagal"}
+
 }

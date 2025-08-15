@@ -1,21 +1,24 @@
-import { format } from "date-fns";
-import { id } from "date-fns/locale";
+import { cn } from "@/lib/utils";
+
+
+type order = {
+    order_id: string;
+    package_id: number;
+    status: string;
+    created_at: string
+    currentPeriodEnd: string;
+    price: number;
+    packageName: string;
+}
 
 type Props = {
-    order: {
-        order_id: string;
-        packageName: string;
-        status: string;
-        created_at: string
-        currentPeriodEnd: string;
-        price: number;     
-    }
+    order: order;
+    isLast: boolean
     
 }
 
-const PaymentCard = ({order}:Props) => {
+const PaymentCard = ({order, isLast}:Props) => {
     
-    const transactionDate = format(new Date(order.created_at), "d MMMM yyyy", { locale: id })
     const price = new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR",
@@ -35,14 +38,15 @@ const PaymentCard = ({order}:Props) => {
       statusText = "Gagal";
     }
 
+    const cardClass = cn(
+        "bg-white  p-4",
+        {
+            "border-b-2": !isLast ,
+        }
+    )
 
     return (
-        <div className="my-7">
-            <span className="flex mb-2">
-                <h1 className="text-sm  font-medium">{transactionDate}</h1>
-            </span>
-
-            <div className="w-full border-2 rounded-xl p-4">
+        <div className={cardClass}>
                 <div className="flex justify-between mb-2">
                     <span className={`bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs font-bold ${statusColor}`}>
                             {statusText}
@@ -63,7 +67,6 @@ const PaymentCard = ({order}:Props) => {
                      <h1>{price}</h1>                    
                     </div>
                 </span>
-            </div>
         </div>
     );
 };

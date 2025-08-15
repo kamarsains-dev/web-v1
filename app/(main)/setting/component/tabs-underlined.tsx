@@ -101,7 +101,6 @@ export default async function TabsUnderlinedDemo() {
                             className="w-full px-4 py-3 rounded-xl border-2 cursor-not-allowed"
                         />
                     </div>
-                <Button variant='primary' className="max-w-[200px] w-full rounded-xl  text-sm h-12 mt-3">Simpan</Button>
                 </form>
             </div>
             <div className="w-full border-t border border-gray-200 flex-grow my-10"></div>

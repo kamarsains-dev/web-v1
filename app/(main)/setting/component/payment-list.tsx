@@ -1,5 +1,7 @@
 import PaymentCard from "./payment-card"
 import { getPackageDetails } from "@/lib/queries"
+import { format, parseISO } from "date-fns"
+import { id } from "date-fns/locale"
 
 type order = {
     order_id: string;
@@ -8,6 +10,7 @@ type order = {
     created_at: string
     currentPeriodEnd: string;
     price: number;
+    packageName: string
 }
 
 type Props = {
@@ -32,17 +35,33 @@ const PaymentList = async({orders}:Props) => {
         price: packageDetails[index]?.price,
     }));
 
+    ordersData.sort((a, b) => new Date (b.created_at).getTime() - new Date(a.created_at).getTime())
+
+    const groupedOrders = ordersData.reduce((acc: {[key: string]: order[]}, order) => {
+         const date = format(parseISO(order.created_at), 'dd MMMM yyyy', { locale: id });
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(order);
+        return acc;
+    }, {})
+
     return (
-        <div className="mt-7">
-            {ordersData.map((order) => {
-                return (
-                <PaymentCard
-                    key={order.order_id}
-                    order={order}
-                />       
-                )
-            })}
-            
+        <div className="mt-7 flex flex-col gap-y-5">
+            {Object.entries(groupedOrders).map(([date, dailyOrders], dateIndex) => (
+                <div key={dateIndex}>
+                    <h2 className="mb-2 text-sm font-semibold text-gray-500">{date}</h2>
+                    <div className="flex flex-col border-2 rounded-xl overflow-hidden">
+                        {dailyOrders.map((order, orderIndex) => (
+                            <PaymentCard
+                                key={order.order_id}
+                                order={order}
+                                isLast={orderIndex === dailyOrders.length - 1}
+                            />
+                        ))}
+                    </div>
+                </div>
+            ))}
         </div>
     )
 }
