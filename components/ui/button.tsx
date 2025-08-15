@@ -26,6 +26,7 @@ const buttonVariants = cva(
         quinary: "bg-[#375CE3] text-white position-y-2 border-[#213C9E] border-b-4 active:border-b-2 hover:bg-[#2B51DE] hover:border-b-4",
         quinaryBorder: "bg-white border-2 position-y-2 border-[#213C9E] border-b-4 active:border-b-2  hover:border-b-4",
         septenary: "bg-gradient-purple text-[#160B74] position-y-2 border-[#5503B9] border-b-4 active:border-b-2 hover:bg-[#2B51DE] hover:border-b-4",
+        danger: "bg-white text-red-500 position-y-2 border-red-500 border-2 border-b-4 active:border-b-2 hover:bg-red-50 hover:border-b-4",
 
       },
       size: {

@@ -65,6 +65,9 @@ const ButtonPage = () => {
             <Button variant="septenary">
                 Septenary
             </Button>
+             <Button variant="danger">
+                Septenary
+            </Button>
             <div>
             <Tabs defaultValue="account" className="w-[400px]">
                 <TabsList>
@@ -84,6 +87,7 @@ const ButtonPage = () => {
                 <Badge variant="destructive">Badge</Badge>
                 <Badge variant="outline">Badge</Badge>
                 <Badge variant="tertiary">Badge</Badge>
+                
 
         
             </div>

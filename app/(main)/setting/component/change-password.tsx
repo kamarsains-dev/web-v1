@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { changePassword, deleteAccount } from "@/app/(auth)/actions";
+import { changePassword } from "@/app/(auth)/actions";
+import DeleteAccountDialog from "@/components/delete-account-dialog";
 
 const ChangePassword = () => {
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("")
     const [loading, setLoading] = useState(false)
-    const [showDeleteModal, setShowDeleteModal] = useState(false)
-    const [deleteLoading, setDeleteLoading] = useState(false)
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,24 +41,6 @@ const ChangePassword = () => {
 
         setLoading(false)
     }
-
-    const handleDeleteAccount = async () => {
-        setDeleteLoading(true)
-        const result = await deleteAccount();
-
-        if(result?.success) {
-            toast.success(result.success)
-            setTimeout(() => {
-                router.push('/')
-            }, 2000)
-        } else {
-            toast.error(result?.error || "Gagal menghapus akun. Silahkan coba lagi.")
-        }
-        setDeleteLoading(false)
-        setShowDeleteModal(false)   
-    }
-
-    
 
     return (
         <div className="mt-5">
@@ -101,30 +82,8 @@ const ChangePassword = () => {
             <div>
                 <h1 className="text-xl font-bold text-red-500">Danger Zone</h1>
                 <p className="text-sm md:text-[15px] my-2 text-red-500">If you need to take a break or want to permanently delete your account, you can manage these options here.</p>    
-                <Button variant='outline' onClick={() => setShowDeleteModal(true)} className="max-w-[200px] w-full rounded-xl bg-white hover:bg-red-100 border-red-500 font-bold text-red-500 text-sm h-12 mt-3">Hapus</Button>
-            </div>  
-
-
-        {showDeleteModal && (
-             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
-                        <h2 className="text-lg font-bold">Konfirmasi Penghapusan Akun</h2>
-                        <p className="my-4 text-sm">Apakah kamu yakin ingin menghapus akun ini? Aksi ini tidak bisa dibatalkan.</p>
-                        <div className="flex justify-end gap-2">
-                            <Button variant="outline" onClick={() => setShowDeleteModal(false)}>Batal</Button>
-                            <Button 
-                                variant="quinary" 
-                                onClick={handleDeleteAccount} 
-                                disabled={deleteLoading}
-                            >
-                                {deleteLoading ? "Menghapus..." : "Hapus Akun Permanen"}
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-        )}   
-
-
+                <DeleteAccountDialog />
+            </div> 
         </div>
 
         
