@@ -34,7 +34,7 @@ const LessonPage = async () => {
                 completed: challenge.completed,
                 type: challenge.type,
                 order: challenge.order,
-                challenge_options: challenge.challenge_options,
+                challenge_options: challenge.challenge_options.sort((a, b) => a.id - b.id),
                 challenge_progress: challenge.challenge_progress
             }))}
             initialThunders={userProgress.thunders}

@@ -19,20 +19,22 @@ export const Options = ({options, onSelect, status, selectedOption, type, disabl
             type === "ASSIST" && "grid-cols-1",
             type === "SELECT" && "grid-cols-2"
         )}>
-            {options.map((option, i) => (
-                <Card 
-                    key={option.id}
-                    id={option.id}
-                    text={option.text}
-                    imageSrc={option.image_src}
-                    shortcut={`${i + 1}`}
-                    selected={selectedOption === option.id}
-                    onClick={() => onSelect(option.id)}
-                    status={status}
-                    disabled={disabled}
-                    type={type}
-                />
-            ))}
+            {options.map((option, i) =>  {
+                return (
+                        <Card 
+                            key={option.id}
+                            id={option.id}
+                            text={option.text}
+                            imageSrc={option.image_src}
+                            shortcut={`${i + 1}`}
+                            selected={selectedOption === option.id}
+                            onClick={() => onSelect(option.id)}
+                            status={status}
+                            disabled={disabled}
+                            type={type}
+                        />
+                    )   
+            })}  
         </div>
     )
 }

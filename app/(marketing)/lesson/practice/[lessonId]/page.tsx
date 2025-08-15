@@ -8,6 +8,8 @@ type LessonIdPageProps = {
     }>;
 }
 
+
+
 const LessonIdPage = async ({params}: LessonIdPageProps) => {
     const {lessonId} = await params;
     const activeLesson = await getLesson(Number(lessonId)); 
@@ -42,7 +44,7 @@ const LessonIdPage = async ({params}: LessonIdPageProps) => {
                 completed: challenge.completed,
                 type: challenge.type,
                 order: challenge.order,
-                challenge_options: challenge.challenge_options,
+                challenge_options: challenge.challenge_options.sort((a, b) => a.id - b.id),
                 challenge_progress: challenge.challenge_progress
             }))}
             initialThunders={userProgress.thunders}
