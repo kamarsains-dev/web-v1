@@ -28,6 +28,7 @@ function Progress({
           width: `${value}`, 
         }}
       >
+        <span className="z-10 text-green-900 font-bold">{value}%</span>
       </ProgressPrimitive.Indicator>
     </ProgressPrimitive.Root>
   )
