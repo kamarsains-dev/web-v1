@@ -10,16 +10,17 @@ import Sweep from "@/components/ui/sweep";
 import RiveWrapper from "./component/rive-wrapper";
 import RiveComponent from "./component/rive";
 import { toast } from "sonner";
+import { customToast } from "@/components/ui/custom-toast";
 
 const ButtonPage = () => {
     const vibrate = UseHaptic(50)
 
     const handleSuccess = () => {
-        toast.success("success")
+        customToast.success("success")
     }
 
      const handleError = () => {
-        toast.error("Error")
+        customToast.error("Error")
     }
 
     const handleWarning = () => {

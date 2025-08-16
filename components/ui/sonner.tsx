@@ -13,7 +13,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       toastOptions={{
         classNames: {
           // ✅ Success - hijau dengan !important
-          success: "!bg-[#E9FFDB] !text-black !border-[#44DA16] !border-2 !rounded-lg",
+          success: "!bg-[#E9FFDB] !text-black !border-[#44DA16] !border-2 !rounded-lg ",
           // ✅ Error - merah dengan !important
           error: "!bg-[#FFCDCD] !text-black !border-[#FF4C4C] !border-2 !rounded-lg",
           // ✅ Warning/Info - kuning dengan !important
