@@ -16,7 +16,7 @@ const handleOut = () => {
 
 export const Header = ({thunders, percentage, hasActiveSubscription}: Props) => {
     return (
-        <header className="py-4 px-10 flex gap-x-5 md:gap-x-7 items-center justify-around max-auto w-full border-b-2 bg-white">
+        <header className="py-8 px-10 flex gap-x-5 md:gap-x-7 items-center justify-around max-auto w-full h-14 border-b-2 bg-white">
             <X size={26} onClick={handleOut} className="text-slate-500 hover:text-slate-800 transition cursor-pointer"/>
             <Progress value={percentage} className="w-full max-w-4xl"/>
             <div className="flex items-center font-bold text-xl w-full max-w-14">

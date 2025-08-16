@@ -10,7 +10,7 @@ type Props = {
 
 export const Footer = ({onCheck, status}:Props) => {
     return (
-        <footer className={cn("py-4 w-full flex",
+        <footer className={cn("py-3 w-full flex",
             status === "correct" && "border-t bg-green-100",
             status === "wrong" && "border-t bg-amber-100"
         )}>
