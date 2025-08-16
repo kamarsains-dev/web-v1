@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer} from 'recharts'
-import { Target, TrendingUp, Brain, Calculator, Award, Zap, Calendar } from 'lucide-react'
+import { Target, TrendingUp, Brain, Calculator, Award, Calendar } from 'lucide-react'
 
 const UserAnalytics = () => {
     // ✅ Dummy data untuk analytics
@@ -103,71 +103,85 @@ const UserAnalytics = () => {
     ]
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6 mt-15">
-            <div className="max-w-[1000px] mx-auto space-y-6">
+        <div className="min-h-screen container mt-16 pb-20">
+            <div className="max-w-[700px] mx-auto space-y-5">
                 
                 {/* Header */}
                 <div className="flex items-center justify-between">
-                    <div>
-                        <h1 className="text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
-                        <p className="text-gray-600 mt-1">Track your UTBK preparation progress</p>
+                    <div className="pt-10 flex flex-col text-left w-full">
+                        <h1 className="text-2xl font-bold">Analytic Dashboard</h1>
+                        <p className="text-sm lg:text-[16px] font-normal text-slate-500">Lessons to Unlock Your Dream Campus.</p>
                     </div>
-                    <Badge className="px-4 py-2 text-sm" variant="secondary">
-                        <Zap className="w-4 h-4 mr-2" />
-                        {userData.currentStreak} day streak!
-                    </Badge>
                 </div>
 
                 {/* Overview Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <Card className="border-l-4 border-l-blue-500">
-                        <CardContent className="p-4">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm text-gray-600">Total Sesi</p>
-                                    <p className="text-2xl font-bold">{userData.totalSessions}</p>
-                                </div>
+                <div className="grid grid-cols-2  gap-3">
+                    <Card className="py-3 px-2  flex justify-center">
+                        <CardContent className="px-2">
+                            <div className="flex items-start w-full gap-x-2">
                                 <Calendar className="w-8 h-8 text-blue-500" />
+                                <div>
+                                    <p className="text-xl font-bold">{userData.totalSessions}</p>
+                                    <p className="text-sm text-slate-500">Total Try Out</p>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>
                     
-                    <Card className="border-l-4 border-l-green-500">
-                        <CardContent className="p-4">
-                            <div className="flex items-center justify-between">
+                    <Card className="py-3 px-2 flex justify-center item-center">
+                        <CardContent className="px-2">
+                            <div className="flex  items-start w-full gap-x-2">
+                                <Target className="w-8 h-8 text-green-500" />                                
                                 <div>
-                                    <p className="text-sm text-gray-600">Akurasi Rata-rata</p>
-                                    <p className="text-2xl font-bold">{userData.averageAccuracy}%</p>
+                                    <p className="text-xl font-bold">{userData.averageAccuracy}%</p>
+                                    <p className="text-sm text-slate-500">Akurasi Ketepatan</p>
                                 </div>
-                                <Target className="w-8 h-8 text-green-500" />
                             </div>
                         </CardContent>
                     </Card>
                     
-                    <Card className="border-l-4 border-l-purple-500">
-                        <CardContent className="p-4">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm text-gray-600">Total Soal</p>
-                                    <p className="text-2xl font-bold">{userData.totalQuestions}</p>
-                                </div>
+                    <Card className="py-3 px-2 flex justify-center item-center">
+                        <CardContent className="px-2">
+                            <div className="flex items-start w-full gap-x-2">
                                 <Brain className="w-8 h-8 text-purple-500" />
+                                <div>
+                                    <p className="text-xl font-bold">{userData.totalQuestions}</p>
+                                    <p className="text-sm text-slate-500">Total Soal</p>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>
                     
-                    <Card className="border-l-4 border-l-orange-500">
-                        <CardContent className="p-4">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm text-gray-600">Jawaban Benar</p>
-                                    <p className="text-2xl font-bold">{userData.correctAnswers}</p>
-                                </div>
+                    <Card className="py-3 px-2 flex justify-center item-center">
+                        <CardContent className="px-2">
+                            <div className="flex items-start w-full gap-x-2">
                                 <Award className="w-8 h-8 text-orange-500" />
+                                <div>
+                                    <p className="text-xl font-bold">{userData.correctAnswers}</p>
+                                    <p className="text-sm text-slate-500">Jawaban Benar</p>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>
                 </div>
+
+                    {/* Progress Chart */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="text-xl font-bold">Progress 7 Hari Terakhir</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <ResponsiveContainer width="100%" height={300}>
+                            <LineChart data={progressData}>
+                                <CartesianGrid strokeDasharray="5 5" />
+                                <XAxis dataKey="day" />
+                                <YAxis domain={[600, 800]} />
+                                <Line type="monotone" dataKey="pm" stroke="#2563eb" strokeWidth={3} name="PM" />
+                                <Line type="monotone" dataKey="pk" stroke="#7c3aed" strokeWidth={3} name="PK" />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </CardContent>
+                </Card>
 
                 {/* Main Content */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -177,19 +191,18 @@ const UserAnalytics = () => {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Calculator className="w-5 h-5 text-blue-600" />
-                                Penalaran Matematika
+                                <h1 className="text-xl font-bold">Penalaran Matematika</h1>
                             </CardTitle>
-                            <CardDescription>Current performance and breakdown</CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-6">
+                        <CardContent className="space-y-5">
                             {/* Score Progress */}
-                            <div className="bg-blue-50 p-4 rounded-lg">
+                            <div>
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm font-medium">Skor Saat Ini</span>
-                                    <span className="text-2xl font-bold text-blue-600">{pmData.currentScore}</span>
+                                    <span className="text-lg font-bold">Skor Saat Ini</span>
+                                    <span className="text-lg font-bold text-blue-600">{pmData.currentScore}</span>
                                 </div>
                                 <div className="flex items-center gap-2 mb-3">
-                                    <span className="text-sm text-gray-600">Target: {pmData.targetScore}</span>
+                                    <span className="text-sm text-slate-500">Target: {pmData.targetScore}</span>
                                     <Badge variant="secondary" className="text-xs">
                                         <TrendingUp className="w-3 h-3 mr-1" />
                                         +{pmData.improvement}
@@ -199,14 +212,16 @@ const UserAnalytics = () => {
                             </div>
 
                             {/* Stats */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="text-center p-3 bg-gray-50 rounded-lg">
-                                    <p className="text-2xl font-bold text-blue-600">{pmData.accuracy}%</p>
-                                    <p className="text-xs text-gray-600">Tingkat Akurasi</p>
+                            <div className="flex justify-center items-center gap-4 bg-gray-100 rounded-lg">
+                                <div className="text-center p-3">
+                                    <p className="text-xl font-bold ">{pmData.accuracy}%</p>
+                                    <p className="text-xs text-slate-500">Tingkat Akurasi</p>
                                 </div>
-                                <div className="text-center p-3 bg-gray-50 rounded-lg">
-                                    <p className="text-2xl font-bold text-blue-600">{pmData.avgTimePerQuestion}m</p>
-                                    <p className="text-xs text-gray-600">Rata-rata Waktu</p>
+                                              <hr className="border border-gray-200 h-16" />
+
+                                <div className="text-center p-3">
+                                    <p className="text-xl font-bold ">{pmData.avgTimePerQuestion}m</p>
+                                    <p className="text-xs text-slate-500">Rata-rata Waktu</p>
                                 </div>
                             </div>
 
@@ -216,7 +231,7 @@ const UserAnalytics = () => {
                                 <div className="space-y-2">
                                     {pmData.topicBreakdown.map((topic) => (
                                         <div key={topic.topic} className="flex items-center justify-between">
-                                            <span className="text-sm text-gray-600">{topic.topic}</span>
+                                            <span className="text-sm text-slate-500">{topic.topic}</span>
                                             <div className="flex items-center gap-2">
                                                 <Progress value={topic.score} className="w-20 h-2" />
                                                 <span className="text-sm font-medium">{topic.score}%</span>
@@ -233,19 +248,18 @@ const UserAnalytics = () => {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Brain className="w-5 h-5 text-purple-600" />
-                                Penalaran Kuantitatif
+                                <h1 className="text-xl font-bold">Penalaran Kuantitatif</h1>
                             </CardTitle>
-                            <CardDescription>Current performance and breakdown</CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-6">
+                        <CardContent className="space-y-5">
                             {/* Score Progress */}
-                            <div className="bg-purple-50 p-4 rounded-lg">
+                            <div>
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm font-medium">Skor Saat Ini</span>
-                                    <span className="text-2xl font-bold text-purple-600">{pkData.currentScore}</span>
+                                    <span className="text-lg font-bold">Skor Saat Ini</span>
+                                    <span className="text-lg font-bold text-purple-600">{pkData.currentScore}</span>
                                 </div>
                                 <div className="flex items-center gap-2 mb-3">
-                                    <span className="text-sm text-gray-600">Target: {pkData.targetScore}</span>
+                                    <span className="text-sm text-slate-500">Target: {pkData.targetScore}</span>
                                     <Badge variant="secondary" className="text-xs">
                                         <TrendingUp className="w-3 h-3 mr-1" />
                                         +{pkData.improvement}
@@ -255,14 +269,16 @@ const UserAnalytics = () => {
                             </div>
 
                             {/* Stats */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="text-center p-3 bg-gray-50 rounded-lg">
-                                    <p className="text-2xl font-bold text-purple-600">{pkData.accuracy}%</p>
-                                    <p className="text-xs text-gray-600">Tingkat Akurasi</p>
+                            <div className="flex justify-center items-center gap-4 bg-gray-100 rounded-lg">
+                                <div className="text-center p-3">
+                                    <p className="text-xl font-bold ">{pkData.accuracy}%</p>
+                                    <p className="text-xs text-slate-500">Tingkat Akurasi</p>
                                 </div>
-                                <div className="text-center p-3 bg-gray-50 rounded-lg">
-                                    <p className="text-2xl font-bold text-purple-600">{pkData.avgTimePerQuestion}m</p>
-                                    <p className="text-xs text-gray-600">Rata-rata Waktu</p>
+                                                                              <hr className="border border-gray-200 h-16" />
+
+                                <div className="text-center p-3">
+                                    <p className="text-xl font-bold ">{pkData.avgTimePerQuestion}m</p>
+                                    <p className="text-xs text-slate-500">Rata-rata Waktu</p>
                                 </div>
                             </div>
 
@@ -272,7 +288,7 @@ const UserAnalytics = () => {
                                 <div className="space-y-2">
                                     {pkData.topicBreakdown.map((topic) => (
                                         <div key={topic.topic} className="flex items-center justify-between">
-                                            <span className="text-sm text-gray-600">{topic.topic}</span>
+                                            <span className="text-sm text-slate-500">{topic.topic}</span>
                                             <div className="flex items-center gap-2">
                                                 <Progress value={topic.score} className="w-20 h-2" />
                                                 <span className="text-sm font-medium">{topic.score}%</span>
@@ -285,24 +301,7 @@ const UserAnalytics = () => {
                     </Card>
                 </div>
 
-                {/* Progress Chart */}
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Progress 7 Hari Terakhir</CardTitle>
-                        <CardDescription>Tracking your daily improvement</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <ResponsiveContainer width="100%" height={300}>
-                            <LineChart data={progressData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="day" />
-                                <YAxis domain={[600, 800]} />
-                                <Line type="monotone" dataKey="pm" stroke="#2563eb" strokeWidth={3} name="PM" />
-                                <Line type="monotone" dataKey="pk" stroke="#7c3aed" strokeWidth={3} name="PK" />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </CardContent>
-                </Card>
+            
 
                 {/* Target PTN Selection */}
                 <Card>
@@ -324,7 +323,7 @@ const UserAnalytics = () => {
                                             </div>
                                             <div>
                                                 <h3 className="font-bold text-sm">{target.university}</h3>
-                                                <p className="text-xs text-gray-600">{target.major}</p>
+                                                <p className="text-xs text-slate-500">{target.major}</p>
                                             </div>
                                         </div>
                                         
@@ -339,11 +338,11 @@ const UserAnalytics = () => {
                                         
                                         <div className="space-y-2">
                                             <div className="flex justify-between items-center">
-                                                <span className="text-xs text-gray-600">PM Target:</span>
+                                                <span className="text-xs text-slate-500">PM Target:</span>
                                                 <span className="text-sm font-bold">{target.pmTarget}</span>
                                             </div>
                                             <div className="flex justify-between items-center">
-                                                <span className="text-xs text-gray-600">PK Target:</span>
+                                                <span className="text-xs text-slate-500">PK Target:</span>
                                                 <span className="text-sm font-bold">{target.pkTarget}</span>
                                             </div>
                                         </div>
