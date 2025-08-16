@@ -4,6 +4,8 @@ import { StickyWrapper } from "@/components/sticky-wrapper";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import InfoCard from "./component/info-card";
 import { Unit } from "./component/unit";
+import { toast } from "sonner";
+
 //import Reminder from "../../component/reminder";
 
 const Learn = async () => {
@@ -15,6 +17,7 @@ const Learn = async () => {
     const [ userProgress, units, courseProgress, lessonPercentage ] = await Promise.all([userProgressData, unitsData, courseProgressData, lessonPercentageData]);
 
     if (!userProgress || !userProgress.active_courses_id || !courseProgress) {
+        toast.warning("Kamu belum pilih materi, pilih salah satu ya")
         redirect("/courses");
     }
 

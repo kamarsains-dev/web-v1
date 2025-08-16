@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Clock from "@/public/clock.png"
-
+import ImportantDates from "./dates";
 
 const Reminder = () => {
     function getCountdownDays(targetDateStr: string): number {
@@ -27,7 +27,10 @@ const Reminder = () => {
                     className="w-16"
                 />
                 <div>
-                    <h1 className="text-lg text-black font-bold">{coundtdown} Hari Menuju UTBK</h1>
+                    <span className="flex justify-between items-center">
+                        <h1 className="text-lg text-black font-bold">{coundtdown} Hari Menuju UTBK</h1>
+                        <ImportantDates />
+                    </span>
                     <p className="text-sm">Capai target skormu sebelum UTBK datang.</p>
                 </div>
             </div>

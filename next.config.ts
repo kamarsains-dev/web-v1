@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
-  async headers() {
+  /*async headers() {
     return [
       {
         source: "/:all*(svg|jpg|png|css|js|woff2|webp|ico|riv)",
@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
         ]
       }
     ]
-  },
+  },*/
   images: {
     remotePatterns: [
       {

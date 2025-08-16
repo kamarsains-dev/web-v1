@@ -185,9 +185,9 @@ export const Quiz = ({
             />    
         </div>
         
-        <div className="min-h-screen w-full flex flex-col ">
+        <div className="min-h-screen flex flex-col">
         
-        <div className={`${inter.className} flex-1 container text-[15px] font-normal  min-h-screen flex flex-col justify-center items-center `}>
+        <div className={`${inter.className} flex-1 container text-[15px] font-normal min-h-screen flex flex-col justify-center items-center`}>
             {challenges.slice(0, activeIndex + 1).map((challenge, index) => {
             const challengeQuestion =
                 challenge.type === "ASSIST" ? "Select the correct meaning" : challenge.question;
@@ -199,7 +199,7 @@ export const Quiz = ({
                 <div
                 key={challenge.challenge.id}
                 ref={(el) => { questionRef.current[index] = el; }}
-                className="min-h-screen lg:w-[600px] max-w-3xl w-full flex flex-col justify-center mx-auto gap-y-8 "
+                className="min-h-screen w-full lg:w-[600px] lg:max-w-3xl flex flex-col justify-center mx-auto gap-y-8"
                 >
                 <h1 className="text-justify">{challengeQuestion}</h1>
                 <div>
