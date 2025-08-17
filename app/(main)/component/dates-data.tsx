@@ -70,11 +70,11 @@ const Reminder = () => {
     };
 
     return (
-        <div className="space-y-2 mt-4 max-h-[400px] overflow-y-auto">
+        <div className="space-y-2 max-h-[400px] overflow-y-auto overflow-hidden">
             {importantDates.map((item, index) => (
                 <div 
                     key={item.id}
-                    className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors duration-150"
+                    className="flex items-center justify-between p-3 rounded-xl transition-colors duration-150"
                 >
                     <div className="flex items-center gap-3">
                         {/* ✅ Circle dengan warna seperti leaderboard */}

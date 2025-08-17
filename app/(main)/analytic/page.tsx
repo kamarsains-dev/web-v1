@@ -1,10 +1,11 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card" // CardDescription
+// import { Badge } from "@/components/ui/badge"
+// import { Progress } from "@/components/ui/progress"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer} from 'recharts'
-import { Target, TrendingUp, Brain, Calculator, Award, Calendar } from 'lucide-react'
+import { Target, Brain, Award, Calendar } from 'lucide-react' // trendingUp calculator
+import UserAvatar from "./component/user-avatar"
 
 const UserAnalytics = () => {
     // ✅ Dummy data untuk analytics
@@ -20,7 +21,7 @@ const UserAnalytics = () => {
     }
 
     // Data untuk PM (Penalaran Matematika)
-    const pmData = {
+    /*const pmData = {
         currentScore: 720,
         targetScore: 800,
         improvement: +15,
@@ -52,15 +53,7 @@ const UserAnalytics = () => {
     }
 
     // Progress chart data (7 hari terakhir)
-    const progressData = [
-        { day: 'Sen', pm: 680, pk: 620 },
-        { day: 'Sel', pm: 695, pk: 635 },
-        { day: 'Rab', pm: 705, pk: 650 },
-        { day: 'Kam', pm: 710, pk: 660 },
-        { day: 'Jum', pm: 715, pk: 665 },
-        { day: 'Sab', pm: 720, pk: 680 },
-        { day: 'Min', pm: 720, pk: 680 }
-    ]
+   
 
     // Target PTN data
     const targetOptions = [
@@ -101,22 +94,31 @@ const UserAnalytics = () => {
             color: 'bg-green-500'
         }
     ]
+        
+*/
+    const progressData = [
+            { day: 'Sen', pm: 680, pk: 620 },
+            { day: 'Sel', pm: 695, pk: 635 },
+            { day: 'Rab', pm: 705, pk: 650 },
+            { day: 'Kam', pm: 710, pk: 660 },
+            { day: 'Jum', pm: 715, pk: 665 },
+            { day: 'Sab', pm: 720, pk: 680 },
+            { day: 'Min', pm: 720, pk: 680 }
+        ]
+
 
     return (
-        <div className="min-h-screen container mt-16 pb-20">
+        <div className="min-h-screen container mt-20 pb-20">
             <div className="max-w-[700px] mx-auto space-y-5">
                 
                 {/* Header */}
-                <div className="flex items-center justify-between">
-                    <div className="pt-10 flex flex-col text-left w-full">
-                        <h1 className="text-2xl font-bold">Analytic</h1>
-                        <p className="text-sm lg:text-[16px] font-normal text-slate-500">Lessons to Unlock Your Dream Campus.</p>
-                    </div>
+                <div>
+                    <UserAvatar />
                 </div>
 
                 {/* Overview Cards */}
                 <div className="grid grid-cols-2  gap-3">
-                    <Card className="py-3 px-2  flex justify-center">
+                    <Card className="py-2 lg:py-3 px-2  flex justify-center">
                         <CardContent className="px-2">
                             <div className="flex items-start w-full gap-x-2">
                                 <Calendar className="w-8 h-8 text-blue-500" />
@@ -128,7 +130,7 @@ const UserAnalytics = () => {
                         </CardContent>
                     </Card>
                     
-                    <Card className="py-3 px-2 flex justify-center item-center">
+                    <Card className="py-2 lg:py-3 px-2 flex justify-center item-center">
                         <CardContent className="px-2">
                             <div className="flex  items-start w-full gap-x-2">
                                 <Target className="w-8 h-8 text-green-500" />                                
@@ -140,7 +142,7 @@ const UserAnalytics = () => {
                         </CardContent>
                     </Card>
                     
-                    <Card className="py-3 px-2 flex justify-center item-center">
+                    <Card className="py-2 lg:py-3 px-2 flex justify-center item-center">
                         <CardContent className="px-2">
                             <div className="flex items-start w-full gap-x-2">
                                 <Brain className="w-8 h-8 text-purple-500" />
@@ -152,7 +154,7 @@ const UserAnalytics = () => {
                         </CardContent>
                     </Card>
                     
-                    <Card className="py-3 px-2 flex justify-center item-center">
+                    <Card className="py-2 lg:py-3 px-2 flex justify-center item-center">
                         <CardContent className="px-2">
                             <div className="flex items-start w-full gap-x-2">
                                 <Award className="w-8 h-8 text-orange-500" />
@@ -168,7 +170,7 @@ const UserAnalytics = () => {
                     {/* Progress Chart */}
                 <Card>
                     <CardHeader>
-                        <CardTitle className="text-xl font-bold">Progress 7 Hari Terakhir</CardTitle>
+                        <CardTitle className="text-xl font-bold">Progress</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <ResponsiveContainer width="100%" height={300}>
@@ -184,9 +186,10 @@ const UserAnalytics = () => {
                 </Card>
 
                 {/* Main Content */}
+                {/*
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     
-                    {/* Penalaran Matematika */}
+                   
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -195,7 +198,7 @@ const UserAnalytics = () => {
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-5">
-                            {/* Score Progress */}
+                          
                             <div>
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="text-lg font-bold">Skor Saat Ini</span>
@@ -211,7 +214,7 @@ const UserAnalytics = () => {
                                 <Progress value={(pmData.currentScore / pmData.targetScore) * 100} className="h-2" />
                             </div>
 
-                            {/* Stats */}
+                         
                             <div className="flex justify-center items-center gap-4 bg-gray-100 rounded-lg">
                                 <div className="text-center p-3">
                                     <p className="text-xl font-bold ">{pmData.accuracy}%</p>
@@ -225,7 +228,7 @@ const UserAnalytics = () => {
                                 </div>
                             </div>
 
-                            {/* Topic Breakdown */}
+                      
                             <div>
                                 <h4 className="font-medium mb-3">Breakdown per Topik</h4>
                                 <div className="space-y-2">
@@ -243,7 +246,7 @@ const UserAnalytics = () => {
                         </CardContent>
                     </Card>
 
-                    {/* Penalaran Kuantitatif */}
+                   
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -252,7 +255,7 @@ const UserAnalytics = () => {
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-5">
-                            {/* Score Progress */}
+                     
                             <div>
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="text-lg font-bold">Skor Saat Ini</span>
@@ -268,7 +271,7 @@ const UserAnalytics = () => {
                                 <Progress value={(pkData.currentScore / pkData.targetScore) * 100} className="h-2" />
                             </div>
 
-                            {/* Stats */}
+           
                             <div className="flex justify-center items-center gap-4 bg-gray-100 rounded-lg">
                                 <div className="text-center p-3">
                                     <p className="text-xl font-bold ">{pkData.accuracy}%</p>
@@ -282,7 +285,7 @@ const UserAnalytics = () => {
                                 </div>
                             </div>
 
-                            {/* Topic Breakdown */}
+               
                             <div>
                                 <h4 className="font-medium mb-3">Breakdown per Topik</h4>
                                 <div className="space-y-2">
@@ -303,7 +306,7 @@ const UserAnalytics = () => {
 
             
 
-                {/* Target PTN Selection */}
+         
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
@@ -352,6 +355,7 @@ const UserAnalytics = () => {
                         </div>
                     </CardContent>
                 </Card>
+                */}
             </div>
         </div>
     );
