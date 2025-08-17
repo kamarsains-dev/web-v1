@@ -91,11 +91,29 @@ export async function POST(request) {
         }
 
         if(transaction_status === "pending") {
+           const { data: orderData, error: orderError } = await supabase
+             .from("orders")
+             .update({status: "pending"})
+             .eq("order_id", order_id)
+
+            if(!orderData || orderError) {
+                console.log("Orders not found in database", orderError)
+                return NextResponse.json({ error: "Order not found" }, {status: 404});
+            }
             return NextResponse.json({message: "Payment pending"}, {status: 200})
         }
 
         if(transaction_status === "expire" || transaction_status === "expired") {
-            return NextResponse.json({message: 'Payment expired'}, {status: 200})
+            const {error: updateOrdersError} = await supabase.from("orders")
+            .update({status: 'failed'})
+            .eq("order_id", order_id)
+
+            if(updateOrdersError) {
+                console.log("Failed to update orders", updateOrdersError)
+            return NextResponse.json({error: 'Failed to update orders'}, {status: 500})
+            }
+        
+            return NextResponse.json({message: "Payment failed"}, {status: 200})
         }
 
         if(transaction_status === "deny" || transaction_status === "failed" || transaction_status === "failure") {

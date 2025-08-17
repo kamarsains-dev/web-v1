@@ -109,7 +109,7 @@ const UserAnalytics = () => {
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div className="pt-10 flex flex-col text-left w-full">
-                        <h1 className="text-2xl font-bold">Analytic Dashboard</h1>
+                        <h1 className="text-2xl font-bold">Analytic</h1>
                         <p className="text-sm lg:text-[16px] font-normal text-slate-500">Lessons to Unlock Your Dream Campus.</p>
                     </div>
                 </div>
@@ -122,7 +122,7 @@ const UserAnalytics = () => {
                                 <Calendar className="w-8 h-8 text-blue-500" />
                                 <div>
                                     <p className="text-xl font-bold">{userData.totalSessions}</p>
-                                    <p className="text-sm text-slate-500">Total Try Out</p>
+                                    <p className="text-sm text-gray-400">Total Try Out</p>
                                 </div>
                             </div>
                         </CardContent>
@@ -134,7 +134,7 @@ const UserAnalytics = () => {
                                 <Target className="w-8 h-8 text-green-500" />                                
                                 <div>
                                     <p className="text-xl font-bold">{userData.averageAccuracy}%</p>
-                                    <p className="text-sm text-slate-500">Akurasi Ketepatan</p>
+                                    <p className="text-sm text-gray-400">Akurasi Ketepatan</p>
                                 </div>
                             </div>
                         </CardContent>
@@ -146,7 +146,7 @@ const UserAnalytics = () => {
                                 <Brain className="w-8 h-8 text-purple-500" />
                                 <div>
                                     <p className="text-xl font-bold">{userData.totalQuestions}</p>
-                                    <p className="text-sm text-slate-500">Total Soal</p>
+                                    <p className="text-sm text-gray-400">Total Soal</p>
                                 </div>
                             </div>
                         </CardContent>
@@ -158,7 +158,7 @@ const UserAnalytics = () => {
                                 <Award className="w-8 h-8 text-orange-500" />
                                 <div>
                                     <p className="text-xl font-bold">{userData.correctAnswers}</p>
-                                    <p className="text-sm text-slate-500">Jawaban Benar</p>
+                                    <p className="text-sm text-gray-400">Jawaban Benar</p>
                                 </div>
                             </div>
                         </CardContent>
@@ -202,7 +202,7 @@ const UserAnalytics = () => {
                                     <span className="text-lg font-bold text-blue-600">{pmData.currentScore}</span>
                                 </div>
                                 <div className="flex items-center gap-2 mb-3">
-                                    <span className="text-sm text-slate-500">Target: {pmData.targetScore}</span>
+                                    <span className="text-sm text-gray-400">Target: {pmData.targetScore}</span>
                                     <Badge variant="secondary" className="text-xs">
                                         <TrendingUp className="w-3 h-3 mr-1" />
                                         +{pmData.improvement}
@@ -215,13 +215,13 @@ const UserAnalytics = () => {
                             <div className="flex justify-center items-center gap-4 bg-gray-100 rounded-lg">
                                 <div className="text-center p-3">
                                     <p className="text-xl font-bold ">{pmData.accuracy}%</p>
-                                    <p className="text-xs text-slate-500">Tingkat Akurasi</p>
+                                    <p className="text-xs text-gray-400">Tingkat Akurasi</p>
                                 </div>
                                               <hr className="border border-gray-200 h-16" />
 
                                 <div className="text-center p-3">
                                     <p className="text-xl font-bold ">{pmData.avgTimePerQuestion}m</p>
-                                    <p className="text-xs text-slate-500">Rata-rata Waktu</p>
+                                    <p className="text-xs text-gray-400">Rata-rata Waktu</p>
                                 </div>
                             </div>
 
@@ -231,7 +231,7 @@ const UserAnalytics = () => {
                                 <div className="space-y-2">
                                     {pmData.topicBreakdown.map((topic) => (
                                         <div key={topic.topic} className="flex items-center justify-between">
-                                            <span className="text-sm text-slate-500">{topic.topic}</span>
+                                            <span className="text-sm text-gray-400">{topic.topic}</span>
                                             <div className="flex items-center gap-2">
                                                 <Progress value={topic.score} className="w-20 h-2" />
                                                 <span className="text-sm font-medium">{topic.score}%</span>
@@ -259,7 +259,7 @@ const UserAnalytics = () => {
                                     <span className="text-lg font-bold text-purple-600">{pkData.currentScore}</span>
                                 </div>
                                 <div className="flex items-center gap-2 mb-3">
-                                    <span className="text-sm text-slate-500">Target: {pkData.targetScore}</span>
+                                    <span className="text-sm text-gray-400">Target: {pkData.targetScore}</span>
                                     <Badge variant="secondary" className="text-xs">
                                         <TrendingUp className="w-3 h-3 mr-1" />
                                         +{pkData.improvement}
@@ -272,13 +272,13 @@ const UserAnalytics = () => {
                             <div className="flex justify-center items-center gap-4 bg-gray-100 rounded-lg">
                                 <div className="text-center p-3">
                                     <p className="text-xl font-bold ">{pkData.accuracy}%</p>
-                                    <p className="text-xs text-slate-500">Tingkat Akurasi</p>
+                                    <p className="text-xs text-gray-400">Tingkat Akurasi</p>
                                 </div>
                                                                               <hr className="border border-gray-200 h-16" />
 
                                 <div className="text-center p-3">
                                     <p className="text-xl font-bold ">{pkData.avgTimePerQuestion}m</p>
-                                    <p className="text-xs text-slate-500">Rata-rata Waktu</p>
+                                    <p className="text-xs text-gray-400">Rata-rata Waktu</p>
                                 </div>
                             </div>
 
@@ -288,7 +288,7 @@ const UserAnalytics = () => {
                                 <div className="space-y-2">
                                     {pkData.topicBreakdown.map((topic) => (
                                         <div key={topic.topic} className="flex items-center justify-between">
-                                            <span className="text-sm text-slate-500">{topic.topic}</span>
+                                            <span className="text-sm text-gray-400">{topic.topic}</span>
                                             <div className="flex items-center gap-2">
                                                 <Progress value={topic.score} className="w-20 h-2" />
                                                 <span className="text-sm font-medium">{topic.score}%</span>
@@ -323,7 +323,7 @@ const UserAnalytics = () => {
                                             </div>
                                             <div>
                                                 <h3 className="font-bold text-sm">{target.university}</h3>
-                                                <p className="text-xs text-slate-500">{target.major}</p>
+                                                <p className="text-xs text-gray-400">{target.major}</p>
                                             </div>
                                         </div>
                                         
@@ -338,11 +338,11 @@ const UserAnalytics = () => {
                                         
                                         <div className="space-y-2">
                                             <div className="flex justify-between items-center">
-                                                <span className="text-xs text-slate-500">PM Target:</span>
+                                                <span className="text-xs text-gray-400">PM Target:</span>
                                                 <span className="text-sm font-bold">{target.pmTarget}</span>
                                             </div>
                                             <div className="flex justify-between items-center">
-                                                <span className="text-xs text-slate-500">PK Target:</span>
+                                                <span className="text-xs text-gray-400">PK Target:</span>
                                                 <span className="text-sm font-bold">{target.pkTarget}</span>
                                             </div>
                                         </div>
