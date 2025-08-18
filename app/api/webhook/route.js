@@ -91,7 +91,7 @@ export async function POST(request) {
         }
 
         if(transaction_status === "pending") {
-           const { data: orderData, error: orderError } = await supabase
+           {/*const { data: orderData, error: orderError } = await supabase
              .from("orders")
              .update({status: "pending"})
              .eq("order_id", order_id)
@@ -99,7 +99,7 @@ export async function POST(request) {
             if(!orderData || orderError) {
                 console.log("Orders not found in database", orderError)
                 return NextResponse.json({ error: "Order not found" }, {status: 404});
-            }
+            }*/}
             return NextResponse.json({message: "Payment pending"}, {status: 200})
         }
 
